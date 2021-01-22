@@ -1,0 +1,104 @@
+# Lansweeper Add-on for Splunk
+
+### Download from Splunkbase
+The Splunkbase link is not available yet.
+
+
+OVERVIEW
+--------
+The Lansweeper Add-on for Splunk is an Splunk App that allows user to collect information from Lansweeper cloud into Splunk. It consist of python scripts to collect the data along side configuration pages in UI to configure the data collection.
+
+Use `Lansweeper App for Splunk` to visualize the data on the dashboards.
+
+
+* Author - CrossRealms International Inc.
+* Version - 1.0.0
+* Build - 1
+* Creates Index - False
+* Compatible with:
+   * Splunk Enterprise version: 8.1, 8.0
+   * OS: Platform Independent
+   * Browser: Google Chrome, Mozilla Firefox, Safari
+
+
+
+TOPOLOGY AND SETTING UP SPLUNK ENVIRONMENT
+------------------------------------------
+This app can be set up in two ways: 
+  1. Standalone Mode: 
+     * Install the `Lansweeper Add-on for Splunk`.
+  2. Distributed Mode: 
+     * Install the `Lansweeper Add-on for Splunk` on the search head. The Add-on configuration is not required on the search head.
+     * Install the `Lansweeper Add-on for Splunk` on the heavy forwarder. Configure the Add-on to collect the required information from the Lansweeper on the heavy forwarder.
+     * The Add-on do not support universal forwarder as it requires python modular inputs to collect the data from Lansweeper.
+     * The Add-on do not require on the Indexer.
+
+
+DEPENDENCIES
+------------------------------------------------------------
+* The Add-on does not have any external dependencies.
+
+
+INSTALLATION
+------------------------------------------------------------
+The Lansweeper Add-on needs to be installed on the Search Head and heavy forwarder.  
+
+* From the Splunk Web home screen, click the gear icon next to Apps. 
+* Click on `Browse more apps`.
+* Search for `Lansweeper Add-on for Splunk` and click Install. 
+* Restart Splunk if you are prompted.
+
+
+DATA COLLECTION & CONFIGURATION
+------------------------------------------------------------
+* TODO - Add Data collection and configuration guide for the Add-on here
+
+
+UNINSTALL APP
+-------------
+To uninstall app, user can follow below steps:
+* SSH to the Splunk instance.
+* Go to folder apps($SPLUNK_HOME/etc/apps).
+* Remove the `TA-lansweeper-add-on-for-splunk` folder from `apps` directory.
+* Restart Splunk.
+
+
+RELEASE NOTES
+-------------
+Version 1.0.0 (Feb 2021)
+* Created App Overview dashboard.
+* Added Details/Forensics dashboard for investigating security issues.
+* Added multiple security alerts with below categories.
+  * Categories: Ransomware, Active Directory & Windows, Office 365, Endpoint Compromise, Network Compromise, Credential Compromise, Sophos and Palo Alto Firewall.
+* Added below reports:
+  * Active Directory & Windows
+  * O365
+  * Network Reports
+  * Palo Alto
+  * Globally Detected Malicious IPs
+  * Sophos
+  * VPN
+  * Authentication
+* Added App configuration dashboard.
+* Added HoneyDB based blocked IP list and used that list to identify bad traffic.
+
+
+
+OPEN SOURCE COMPONENTS AND LICENSES
+------------------------------
+* The Add-on is built by UCC framework (https://pypi.org/project/splunk-add-on-ucc-framework/).
+
+
+CONTRIBUTORS
+------------
+* Vatsal Jagani
+* Usama Houlila
+* Preston Carter
+
+
+SUPPORT
+-------
+* Contact - CrossRealms International Inc.
+  * US: +1-312-2784445
+* License Agreement - https://d38o4gzaohghws.cloudfront.net/static/misc/eula.html
+* Copyright - Copyright CrossRealms Internationals, 2021
