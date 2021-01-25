@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="TA-lansweeper-add-on-for-splunk:templates/ta-lansweeper-add-on-for-splunk_redirect.html" type="html" isDashboard="False">
+    <label>Redirect</label>
+</view>

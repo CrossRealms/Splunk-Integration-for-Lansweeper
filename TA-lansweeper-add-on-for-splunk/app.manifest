@@ -1,0 +1,50 @@
+{
+    "dependencies": {},
+    "incompatibleApps": {},
+    "info": {
+        "author": [
+            {
+                "company": "CrossRealms International Inc.",
+                "email": null,
+                "name": "CrossRealms International Inc."
+            }
+        ],
+        "classification": {
+            "categories": ["IT Operations"],
+            "developmentStatus": "Production/Stable",
+            "intendedAudience": "IT Professionals"
+        },
+        "commonInformationModels": null,
+        "description": "Lansweeper add-on for Splunk",
+        "id": {
+            "group": null,
+            "name": "TA-lansweeper-add-on-for-splunk",
+            "version": "1.0.0"
+        },
+        "license": {
+            "name": null,
+            "text": null,
+            "uri": null
+        },
+        "privacyPolicy": {
+            "name": null,
+            "text": null,
+            "uri": null
+        },
+        "releaseDate": null,
+        "releaseNotes": {
+            "name": null,
+            "text": null,
+            "uri": null
+        },
+        "title": "Lansweeper add-on for Splunk"
+    },
+    "inputGroups": {},
+    "platformRequirements": {
+        "splunk": {
+            "Enterprise": "*"
+        }
+    },
+    "schemaVersion": "1.0.0",
+    "tasks": []
+}

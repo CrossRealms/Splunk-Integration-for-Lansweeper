@@ -51,7 +51,44 @@ The Lansweeper Add-on needs to be installed on the Search Head and heavy forward
 
 DATA COLLECTION & CONFIGURATION
 ------------------------------------------------------------
-* TODO - Add Data collection and configuration guide for the Add-on here
+### Lansweeper API Documentation ###
+* https://www.lansweeper.com/kb-category/api/index.html
+
+
+### Configuration Required on Lansweeper Cloud ###
+* Reference - https://www.lansweeper.com/kb-category/api/auth.html
+
+
+### Configure Account ###
+* Navigate to `Lansweeper Add-on for Splunk` > `Configuration` > `Account` on Splunk UI.
+* Click on `Add`.
+* Add below parameters:
+
+| Parameter | Description |
+| --- | --- |
+| Account name | Any unique name to distinguish this client-id and secret from other in case of multiple accounts configured in the Add-on. |
+| Client Id | Client id received from Lansweeper. |
+| Client Secret | Client secret received from Lansweeper. |
+| Redirect url | This field will be auto-populated. Do not make any changes. |
+
+* Click on `Add`.
+* If you see time-out issue while saving the account, retry. The time-out is set to 30 seconds.
+
+
+### Configure Data Input ###
+* Navigate to `Lansweeper Add-on for Splunk` > `Input` on Splunk UI.
+* Click on `Create New Input`.
+* Add below parameters:
+
+| Parameter | Description |
+| --- | --- |
+| Name | An unique name for the Input. |
+| Interval | Interval in seconds, at which the Add-on should collect latest data from Lansweeper API. |
+| Index | Select/Type the index name in which lansweeper data will be stored in Splunk. |
+| Account Name | Select the account name configured in the Configuration page, which you want to use for data collection. |
+| Site | Select the site names from Lansweeper for which you want to collect the data. |
+
+* Click on `Save`.
 
 
 UNINSTALL APP
