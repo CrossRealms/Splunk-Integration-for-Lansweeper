@@ -103,22 +103,8 @@ To uninstall app, user can follow below steps:
 RELEASE NOTES
 -------------
 Version 1.0.0 (Feb 2021)
-* Created App Overview dashboard.
-* Added Details/Forensics dashboard for investigating security issues.
-* Added multiple security alerts with below categories.
-  * Categories: Ransomware, Active Directory & Windows, Office 365, Endpoint Compromise, Network Compromise, Credential Compromise, Sophos and Palo Alto Firewall.
-* Added below reports:
-  * Active Directory & Windows
-  * O365
-  * Network Reports
-  * Palo Alto
-  * Globally Detected Malicious IPs
-  * Sophos
-  * VPN
-  * Authentication
-* Added App configuration dashboard.
-* Added HoneyDB based blocked IP list and used that list to identify bad traffic.
-
+* Created Add-on by UCC Splunk-Python library.
+* Added Add-on configuration pages.
 
 
 OPEN SOURCE COMPONENTS AND LICENSES
