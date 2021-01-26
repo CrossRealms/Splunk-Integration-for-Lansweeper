@@ -1,7 +1,7 @@
 {
     "meta": {
         "name": "TA-lansweeper-add-on-for-splunk",
-        "displayName": "Lansweeper add-on for Splunk",
+        "displayName": "Lansweeper Add-on for Splunk",
         "version": "1.0.0",
         "apiVersion": "3.0.0",
         "restRoot": "TA_lansweeper_add_on_for_splunk",

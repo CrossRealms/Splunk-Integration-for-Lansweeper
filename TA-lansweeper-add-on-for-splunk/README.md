@@ -83,8 +83,8 @@ DATA COLLECTION & CONFIGURATION
 | Parameter | Description |
 | --- | --- |
 | Name | An unique name for the Input. |
-| Interval | Interval in seconds, at which the Add-on should collect latest data from Lansweeper API. |
-| Index | Select/Type the index name in which lansweeper data will be stored in Splunk. |
+| Interval | Interval in seconds, at which the Add-on should collect latest data from Lansweeper API. Ideal value is between 3600 (1 hour) to 14400 (4 hour). |
+| Index | Select/Type the index name in which lansweeper data will be stored in Splunk. The index name by default supported by `Lansweeper App for Splunk` is `lansweeper`. |
 | Account Name | Select the account name configured in the Configuration page, which you want to use for data collection. |
 | Site | Select the site names from Lansweeper for which you want to collect the data. |
 

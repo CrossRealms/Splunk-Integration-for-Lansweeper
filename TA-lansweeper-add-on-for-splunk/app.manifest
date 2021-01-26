@@ -15,7 +15,7 @@
             "intendedAudience": "IT Professionals"
         },
         "commonInformationModels": null,
-        "description": "Lansweeper add-on for Splunk",
+        "description": "Lansweeper Add-on for Splunk",
         "id": {
             "group": null,
             "name": "TA-lansweeper-add-on-for-splunk",
@@ -37,7 +37,7 @@
             "text": null,
             "uri": null
         },
-        "title": "Lansweeper add-on for Splunk"
+        "title": "Lansweeper Add-on for Splunk"
     },
     "inputGroups": {},
     "platformRequirements": {

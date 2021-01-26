@@ -1,4 +1,4 @@
-<nav search_view="search" color="#65A637">
+<nav search_view="search" color="#393D46">
 <view name="inputs" />
 <view name="configuration" default="true" />
 <view name="search" label="Search"/>
