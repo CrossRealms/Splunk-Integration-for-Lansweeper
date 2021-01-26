@@ -1,0 +1,64 @@
+<form>
+  <label>Assets</label>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="tkn_site">
+      <label>Site</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>site_name</fieldForLabel>
+      <fieldForValue>site_name</fieldForValue>
+      <search>
+        <query>`ls_assets_data` | dedup site_name</query>
+        <earliest>-4h@h</earliest>
+        <latest>now</latest>
+      </search>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Total Assets</title>
+      <single>
+        <search>
+          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | stats count</query>
+          <earliest>-4h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Asset Types</title>
+      <table>
+        <search>
+          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | stats count by assetTypeName</query>
+          <earliest>-4h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>All Assets</title>
+      <table>
+        <search>
+          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | table assetName, assetTypeName, ipAddress, mac, userDomain, userName, firstSeen, lastSeen, lastChanged</query>
+          <earliest>-4h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>
