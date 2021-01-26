@@ -6,7 +6,7 @@ The Splunkbase link is not available yet.
 
 OVERVIEW
 --------
-The Lansweeper Add-on for Splunk is an Splunk App that allows user to collect information from Lansweeper cloud into Splunk. It consist of python scripts to collect the data along side configuration pages in UI to configure the data collection.
+The Lansweeper Add-on for Splunk is an Splunk App that allows user to collect information (assets) from Lansweeper Cloud into Splunk. It consist of python scripts to collect the data along side configuration pages in UI to configure the data collection.
 
 Use `Lansweeper App for Splunk` to visualize the data on the dashboards.
 

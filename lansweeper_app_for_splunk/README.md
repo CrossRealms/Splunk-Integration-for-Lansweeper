@@ -6,7 +6,7 @@ The Splunkbase link is not available yet.
 
 OVERVIEW
 --------
-The Lansweeper App for Splunk is an Splunk App that visualize the data collected by Lansweeper like assets, softwares and other information related to assets. It contains useful dashboards. 
+The Lansweeper App for Splunk is an Splunk App that visualize the data (assets) collected by Lansweeper Cloud. It contains useful dashboards. 
 
 The App is using data collected by the `Lansweeper Add-on for Splunk`.
 
