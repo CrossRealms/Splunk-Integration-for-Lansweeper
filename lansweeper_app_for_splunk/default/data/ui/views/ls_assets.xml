@@ -45,7 +45,7 @@
       <title>All Assets</title>
       <table>
         <search>
-          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | table assetName, assetTypeName, ipAddress, mac, userDomain, userName, firstSeen, lastSeen, lastChanged</query>
+          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | rename "assetGroups{}.groupName" as groupName, osCodeId as osVersion | table assetName, assetTypeName, userDomain, groupName, ipAddress, mac, osVersion, userName, firstSeen, lastSeen, lastChanged</query>
           <earliest>-4h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>

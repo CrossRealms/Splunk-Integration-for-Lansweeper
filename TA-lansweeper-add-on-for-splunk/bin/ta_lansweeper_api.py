@@ -131,18 +131,18 @@ class Lansweeper:
             "assetCustom.stateName",
             "asset.assetName",
             "asset.assetTypeName",
+            "asset.assetGroups.groupName",
+            "asset.buildNumber",
+            "asset.version",
+            "asset.osCodeId",
             "asset.firstSeen",
-            "asset.fqdn",
-            "asset.ipAddress",
             "asset.lastChanged",
             "asset.lastSeen",
+            "asset.fqdn",
+            "asset.ipAddress",
             "asset.mac",
-            "asset.osCodeKey",
             "asset.userDomain",
             "asset.userName",
-            "asset.assetGroups.groupName",
-            "assetCustom.serialNumber",
-            "errors.errorText", 
             ]){
             total
             items
@@ -153,6 +153,37 @@ class Lansweeper:
                 }
             }}
             }""" %(site_id, cursor, page)
+
+        '''
+        Information about fields of assets
+        -----------------------------------
+        "asset.assetName" - Name
+        "asset.assetTypeName" - Type
+        "asset.assetGroups.groupName" - Asset Group
+        "asset.buildNumber" - Build number (Not sure, if this will going to be useful)
+        "asset.version" - Version number (Not sure, if this will going to be useful)
+
+        "asset.osCodeId" - Has some key, does not seem to be directly useful
+        "asset.osCodeId" - Has version number for the OS
+
+        "asset.firstSeen" - First Seen
+        "asset.lastChanged" - Last changed
+        "asset.lastSeen" - Last seen
+
+        "asset.fqdn" - FQDN
+        "asset.ipAddress" - IP address
+        "asset.mac" - Mac address
+
+        "asset.userDomain" - User domain
+        "asset.userName" - Username
+
+        "asset.countAntiVirus" - No errors, but field is not coming in any results
+
+        "errors.errorText" - Not working for now, as discussed with Lansweeper team (Though, no errors)
+
+        "assetCustom.stateName" and "assetCustom.serialNumber" - No errors, but unable to fetch for any of the assets
+        '''
+
         try:
             response = requests.post(self.graphql_url, json={'query': query}, headers=headers, proxies=self.proxy_settings)
             # self.logger.info('Asset Status={}, response={}'.format(response.status_code, response.text))
