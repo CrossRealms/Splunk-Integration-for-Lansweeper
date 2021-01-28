@@ -28,10 +28,22 @@
       </single>
     </panel>
     <panel>
+      <title>Asset States</title>
+      <table>
+        <search>
+          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | rename "assetCustom.stateName" as State | stats count by State</query>
+          <earliest>-4h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
       <title>Asset Types</title>
       <table>
         <search>
-          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | stats count by assetTypeName</query>
+          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | rename "asset.assetTypeName" as AssetType | stats count by AssetType</query>
           <earliest>-4h@h</earliest>
           <latest>now</latest>
         </search>
@@ -43,9 +55,21 @@
   <row>
     <panel>
       <title>All Assets</title>
+      <input type="dropdown" token="tkn_asset_state">
+        <label>State</label>
+        <choice value="*">All</choice>
+        <default>*</default>
+        <fieldForLabel>State</fieldForLabel>
+        <fieldForValue>State</fieldForValue>
+        <search>
+          <query>`ls_assets_data` site_name=$tkn_site|s$ | rename "assetCustom.stateName" as State | dedup State</query>
+          <earliest>-4h@h</earliest>
+          <latest>now</latest>
+        </search>
+      </input>
       <table>
         <search>
-          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | rename "assetGroups{}.groupName" as groupName, osCodeId as osVersion | table assetName, assetTypeName, userDomain, groupName, ipAddress, mac, osVersion, userName, firstSeen, lastSeen, lastChanged</query>
+          <query>`ls_assets_data` site_name=$tkn_site|s$ "assetCustom.stateName"=$tkn_asset_state|s$ | dedup id | rename "asset.assetName" as Name, "asset.assetTypeName" as Type, "assetCustom.stateName" as State, "asset.userDomain" as Domain, "asset.assetGroups{}.groupName" as GroupName, "asset.ipAddress" as IPAddress, "asset.mac" as MacAddress, "asset.osCodeId" as OSVersion, "asset.userName" as User, "asset.firstSeen" as FirstSeen, "asset.lastSeen" as LastSeen, "asset.lastChanged" as LastChanged | table Name, Type, State, Domain, GroupName, IPAddress, MacAddress, OSVersion, User, FirstSeen, LastSeen, LastChanged</query>
           <earliest>-4h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
