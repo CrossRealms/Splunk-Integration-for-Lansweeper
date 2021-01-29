@@ -102,7 +102,7 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
-Version 1.0.0 (Feb 2021)
+Version 1.0.0 (Jan 2021)
 * Created Add-on by UCC Splunk-Python library.
 * Added Add-on configuration pages.
 
