@@ -118,7 +118,7 @@ class Lansweeper:
                     return False
 
                 self.logger.info('Successfully refreshed the access token')
-                return {'access_token': response.get('access_token'), 'refresh_token': response.get('refresh_token')}
+                return {'access_token': response.get('access_token')}
         except Exception as exception:
             self.logger.exception(
                 'Error while checking if the access token is expired, error={}'.format(exception))
