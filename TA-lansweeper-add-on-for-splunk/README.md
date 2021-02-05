@@ -12,7 +12,7 @@ Use `Lansweeper App for Splunk` to visualize the data on the dashboards.
 
 
 * Author - CrossRealms International Inc.
-* Version - 1.0.0
+* Version - 1.0.1
 * Build - 1
 * Creates Index - False
 * Compatible with:
@@ -102,9 +102,14 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.0.1 (Feb 2021)
+* Resolved App-Inspect Failure (nested App present in the package).
+
+
 Version 1.0.0 (Jan 2021)
 * Created Add-on by UCC Splunk-Python library.
 * Added Add-on configuration pages.
+
 
 
 OPEN SOURCE COMPONENTS AND LICENSES
