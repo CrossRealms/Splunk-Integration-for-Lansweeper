@@ -142,6 +142,7 @@ class Lansweeper:
                 page: %s
             }, fields: [
             "assetCustom.stateName",
+            "asset.assetId",
             "asset.assetName",
             "asset.assetTypeName",
             "asset.assetGroups.groupName",
