@@ -142,6 +142,10 @@ class Lansweeper:
                 page: %s
             }, fields: [
             "assetCustom.stateName",
+            "assetCustom.serialNumber",
+            "assetCustom.model",
+            "assetCustom.manufacturer",
+            "asset.assetId",
             "asset.assetName",
             "asset.assetTypeName",
             "asset.assetGroups.groupName",
@@ -156,6 +160,16 @@ class Lansweeper:
             "asset.mac",
             "asset.userDomain",
             "asset.userName",
+            "asset.assetDomain",
+            "asset.memory",
+            "asset.processor",
+            "asset.serviceVersion",
+            "asset.lsAgentVersion",
+            "asset.lastLsAgent",
+            "asset.lastTried",
+            "asset.description",
+            "assetCustom.dnsName",
+            "asset.ipLocation.ipLocation"
             ]){
             total
             items
