@@ -1,7 +1,7 @@
 <form>
-  <label>Assets</label>
+  <label>Assets Clone</label>
   <fieldset submitButton="false">
-    <input type="dropdown" token="tkn_site">
+    <input type="dropdown" token="tkn_site" depends="$hide$">
       <label>Site</label>
       <choice value="*">All</choice>
       <default>*</default>
@@ -19,7 +19,7 @@
       <title>Total Assets</title>
       <single>
         <search>
-          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | stats count</query>
+          <query>`ls_assets_data`  | eval id=coalesce(AssetID,id)| dedup id | stats count</query>
           <earliest>-4h@h</earliest>
           <latest>now</latest>
         </search>
@@ -31,8 +31,23 @@
       <title>Asset States</title>
       <table>
         <search>
-          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | rename "assetCustom.stateName" as State | stats count by State</query>
+          <query>`ls_assets_data`  | eval id=coalesce(AssetID,id)| dedup id  | stats count by Statename</query>
           <earliest>-4h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Assets With Lansweeper Agent</title>
+      <table>
+        <search>
+          <query>`ls_assets_data`  Statename=$tkn_asset_state|s$  
+| eval id=coalesce(AssetID,id) 
+| dedup id 
+| eval LsAgentVersion=if(isnull(LsAgentVersion),"No Lansweeper Agent",LsAgentVersion) | stats count by LsAgentVersion</query>
+          <earliest>-4h@m</earliest>
           <latest>now</latest>
         </search>
         <option name="drilldown">none</option>
@@ -43,7 +58,7 @@
       <title>Asset Types</title>
       <table>
         <search>
-          <query>`ls_assets_data` site_name=$tkn_site|s$ | dedup id | rename "asset.assetTypeName" as AssetType | stats count by AssetType</query>
+          <query>`ls_assets_data`  | eval id=coalesce(AssetID,id) | dedup id | stats count by AssetTypename</query>
           <earliest>-4h@h</earliest>
           <latest>now</latest>
         </search>
@@ -62,14 +77,19 @@
         <fieldForLabel>State</fieldForLabel>
         <fieldForValue>State</fieldForValue>
         <search>
-          <query>`ls_assets_data` site_name=$tkn_site|s$ | rename "assetCustom.stateName" as State | dedup State</query>
+          <query>`ls_assets_data`   | dedup Statename</query>
           <earliest>-4h@h</earliest>
           <latest>now</latest>
         </search>
       </input>
       <table>
         <search>
-          <query>`ls_assets_data` site_name=$tkn_site|s$ "assetCustom.stateName"=$tkn_asset_state|s$ | dedup id | rename "asset.assetName" as Name, "asset.assetTypeName" as Type, "assetCustom.stateName" as State, "asset.userDomain" as Domain, "asset.assetGroups{}.groupName" as GroupName, "asset.ipAddress" as IPAddress, "asset.mac" as MacAddress, "asset.osCodeId" as OSVersion, "asset.userName" as User, "asset.firstSeen" as FirstSeen, "asset.lastSeen" as LastSeen, "asset.lastChanged" as LastChanged | table Name, Type, State, Domain, GroupName, IPAddress, MacAddress, OSVersion, User, FirstSeen, LastSeen, LastChanged</query>
+          <query>`ls_assets_data`  Statename=$tkn_asset_state|s$  
+| eval id=coalesce(AssetID,id) 
+| dedup id 
+| rename AssetName as Name, AssetTypename as Type, Statename as State, Userdomain as UserDomain, AssetGroup as GroupName, IPAddress as IPAddress, Mac as MacAddress, OScode as OSVersion, Username as User, Firstseen as FirstSeen, Lastseen as LastSeen, LastChanged as LastChanged 
+| fields Name, Type, State, UserDomain, GroupName, IPAddress, MacAddress, OSVersion, User, FirstSeen, LastSeen, LastChanged, BuildNumber, Description ,DNSName,Domain,FQDN,IPLocation,LastLsAgent,LsAgentVersion,Manufacturer,Model,Memory,Processor,Serialnumber,ServiceVersion,Version 
+| table  State,GroupName,Name, Description,IPAddress,MacAddress,FQDN,IPLocation,Domain,User,Type,OSVersion,LsAgentVersion,LastLsAgent,LastSeen,LastChanged,Memory,Manufacturer,Model,Processor,Serialnumber</query>
           <earliest>-4h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
