@@ -1,18 +1,18 @@
 # Lansweeper Add-on for Splunk
 
 ### Download from Splunkbase
-The Splunkbase link is not available yet.
+https://splunkbase.splunk.com/app/5418/
 
 
 OVERVIEW
 --------
-The Lansweeper Add-on for Splunk is an Splunk App that allows user to collect information (assets) from Lansweeper Cloud into Splunk. It consist of python scripts to collect the data along side configuration pages in UI to configure the data collection.
+The Lansweeper Add-on for Splunk is an Splunk App that allows user to collect information (assets) from Lansweeper (Cloud or On-prem (On-prem support added from version 2.0.0)) into Splunk. It consist of python scripts to collect the data along side configuration pages in UI to configure the data collection.
 
-Use `Lansweeper App for Splunk` to visualize the data on the dashboards.
+Use <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Splunk</a> to visualize the data on the dashboards.
 
 
 * Author - CrossRealms International Inc.
-* Version - 1.0.1
+* Version - 2.0.0
 * Build - 1
 * Creates Index - False
 * Compatible with:
@@ -36,7 +36,8 @@ This app can be set up in two ways:
 
 DEPENDENCIES
 ------------------------------------------------------------
-* The Add-on does not have any external dependencies.
+* The Add-on does not have any external dependencies if you want to collect data from Lansweeper cloud.
+* If you wish to collect data from on-prem database, you need <a href="https://splunkbase.splunk.com/app/2686/">Splunk DB Connect</a> to collect data. See `DATA COLLECTION & CONFIGURATION FROM ON-PREM` for more information about on-prem data collection.
 
 
 INSTALLATION
@@ -49,7 +50,7 @@ The Lansweeper Add-on needs to be installed on the Search Head and heavy forward
 * Restart Splunk if you are prompted.
 
 
-DATA COLLECTION & CONFIGURATION
+DATA COLLECTION & CONFIGURATION FROM CLOUD
 ------------------------------------------------------------
 ### Lansweeper API Documentation ###
 * https://www.lansweeper.com/kb-category/api/index.html
@@ -91,17 +92,67 @@ DATA COLLECTION & CONFIGURATION
 * Click on `Save`.
 
 
+
+DATA COLLECTION & CONFIGURATION FROM ON-PREM
+------------------------------------------------------------
+### Lansweeper Database Documentation ###
+* To see Lansweeper database structure and more information refer to Lansweeper on-prem UI.
+
+
+### Configuration Required for Lansweeper Database ###
+1. To connect Splunk with on-prem Lansweeper database, the Lansweeper database need to be migrated to some that supports remote connection.
+    * Default database for Lansweeper is LocalDB which does not support remote connection.
+    * Refer to Lansweeper Documentation to migrate the existing database.
+      * To migrate LocalDB to SQL Server - https://www.lansweeper.com/knowledgebase/localdb-to-sql-server/
+2. Create a new user to Lansweeper database for Splunk to use. Use a separate read-only user for security reasons.
+3. Make sure you have following things about the database handy for Splunk connection:
+    * Lansweeper database server IP address
+    * Lansweeper database remote connection port (Make sure if the Splunk Heavy forwarder is on remote machine, firewall allows this connection.)
+    * Username and Password for the the user that you just created in above step no. 2.
+4. Contact to Lansweeper administrator for above discussion.
+
+
+### Configure Splunk DB Connect for Data Collection ###
+1. Make sure you install `Lansweeper Add-on for Splunk` on the server where you are configuring `Splunk DB Connect`.
+    * You can download Splunk DB Connect App from <a href="https://splunkbase.splunk.com/app/2686/">here</a>.
+2. Go to `Splunk DB Connect` on Splunk Heavy Forwarder.
+3. Go to `Configuration` on the navigation of the DB Connect App.
+4. Go to identities and create a new identity.
+    * Identity Name - Unique name of identity
+    * Username - Username for the Lansweeper database
+    * Password - Password for the Lansweeper database
+6. Go to `Configuration > Connections` and create a new connection.
+    * Connection Name - Unique name for the database connection
+    * Identify - Select the identity created in previous step.
+    * Connection Type - Select appropriate database connection type
+    * Timezone - Timezone of database server (TODO)
+    * Host - Hostname of IP Address of database server
+    * Port - Port number of database connection (Refer to `Configuration Required for Lansweeper Database` section above.)
+    * Default Database - Use `lansweeper_db`
+
+
+### Configure Data Input ###
+* To create input use `db_inputs.conf.template` file from `default` directory of the App.
+* If you wish to create the input from DB Connect UI, refer the `db_inputs.conf.template` file for reference.
+
+
 UNINSTALL APP
 -------------
 To uninstall app, user can follow below steps:
 * SSH to the Splunk instance.
 * Go to folder apps($SPLUNK_HOME/etc/apps).
 * Remove the `TA-lansweeper-add-on-for-splunk` folder from `apps` directory.
+* Remove the DB Connect Identity, Connection and Inputs that you have created.
 * Restart Splunk.
 
 
 RELEASE NOTES
 -------------
+Version 2.0.0 (April 2021)
+* On-prem Lansweeper Support added (with database connection).
+* TODO - Add more stuff, look from changes on the GitHub
+
+
 Version 1.0.1 (Feb 2021)
 * Resolved App-Inspect Failure (nested App present in the package).
 
@@ -122,6 +173,7 @@ CONTRIBUTORS
 * Vatsal Jagani
 * Usama Houlila
 * Preston Carter
+* Bhavik Bhalodia
 
 
 SUPPORT

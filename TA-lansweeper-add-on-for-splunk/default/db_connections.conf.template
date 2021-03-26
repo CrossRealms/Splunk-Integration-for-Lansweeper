@@ -1,0 +1,11 @@
+[Lansweeper_DB]
+disabled = 0
+connection_type = <generic_mssql, change it based on SQL database you are using on lansweeper>
+database = lansweeperdb
+host = <host or ip address of lansweeper database>
+identity = <identity create from DB connect UI>
+jdbcUseSSL = true
+localTimezoneConversionEnabled = false
+port = <port number of the lansweeper database>
+readonly = false
+timezone = <timezone of lansweeper database server>
