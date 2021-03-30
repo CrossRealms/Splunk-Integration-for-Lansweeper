@@ -12,7 +12,7 @@ The App is using data collected by the <a href="https://splunkbase.splunk.com/ap
 
 
 * Author - CrossRealms International Inc.
-* Version - 2.0.0
+* Version - 1.1.0
 * Build - 1
 * Creates Index - False
 * Uses KV Store - True. This App uses Splunk KV Store for storing some of the lookup files
@@ -70,7 +70,7 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
-Version 2.0.0 (April 2021)
+Version 1.1.0 (April 2021)
 * Support for data from On-Prem database support.
 * Added more important fields to dashboard.
 * TODO - do final check to Github and include all the changes.

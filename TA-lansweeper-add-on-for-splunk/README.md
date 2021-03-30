@@ -6,13 +6,13 @@ https://splunkbase.splunk.com/app/5418/
 
 OVERVIEW
 --------
-The Lansweeper Add-on for Splunk is an Splunk App that allows user to collect information (assets) from Lansweeper (Cloud or On-prem (On-prem support added from version 2.0.0)) into Splunk. It consist of python scripts to collect the data along side configuration pages in UI to configure the data collection.
+The Lansweeper Add-on for Splunk is an Splunk App that allows user to collect information (assets) from Lansweeper (Cloud or On-prem (On-prem support added from version 1.1.0)) into Splunk. It consist of python scripts to collect the data along side configuration pages in UI to configure the data collection.
 
 Use <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Splunk</a> to visualize the data on the dashboards.
 
 
 * Author - CrossRealms International Inc.
-* Version - 2.0.0
+* Version - 1.1.0
 * Build - 1
 * Creates Index - False
 * Compatible with:
@@ -148,7 +148,7 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
-Version 2.0.0 (April 2021)
+Version 1.1.0 (April 2021)
 * On-prem Lansweeper Support added (with database connection).
 * TODO - Add more stuff, look from changes on the GitHub
 
