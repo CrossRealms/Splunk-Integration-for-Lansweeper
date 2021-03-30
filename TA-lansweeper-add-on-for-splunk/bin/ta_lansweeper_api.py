@@ -142,6 +142,9 @@ class Lansweeper:
                 page: %s
             }, fields: [
             "assetCustom.stateName",
+            "assetCustom.serialNumber",
+            "assetCustom.model",
+            "assetCustom.manufacturer",
             "asset.assetId",
             "asset.assetName",
             "asset.assetTypeName",
@@ -157,6 +160,17 @@ class Lansweeper:
             "asset.mac",
             "asset.userDomain",
             "asset.userName",
+            "asset.assetDomain",
+            "asset.memory",
+            "asset.processor",
+            "asset.serviceVersion",
+            "asset.lsAgentVersion",
+            "asset.lastLsAgent",
+            "asset.description",
+            "macOsInfo.systemVersion",
+            "linuxSystem.osRelease",
+            "operatingSystems.caption",
+            "asset.ipLocation.ipLocation"
             ]){
             total
             items
@@ -171,7 +185,7 @@ class Lansweeper:
         '''
         Information about fields of assets
         -----------------------------------
-        Note - We are not fetching all the fields as of now as currently the API has limitation where maximum of 15 fields can be retrieved.
+        Note - We are not fetching all the fields as of now as currently the API has limitation where maximum of 30 fields can be retrieved.
 
         "asset.assetName" - Name
         "asset.assetTypeName" - Type
@@ -197,6 +211,11 @@ class Lansweeper:
         "asset.countAntiVirus" - Discussed with Lansweeper team, if the database has null value in the field, the field will not be returned by the API
 
         "errors.errorText" - Not working for now, as discussed with Lansweeper team (Though, no errors)
+        
+        Below fields are not added due to fields limit but can be added as per the usecase
+        "asset.lastTried"
+        "assetCustom.dnsName"
+        "assetCustom.lastPatched"
         '''
 
         try:
