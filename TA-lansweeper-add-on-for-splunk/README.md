@@ -152,7 +152,6 @@ RELEASE NOTES
 -------------
 Version 1.1.0 (April 2021)
 * On-prem Lansweeper Support added (with database connection).
-* TODO - Add more stuff, look from changes on the GitHub
 
 
 Version 1.0.1 (Feb 2021)
