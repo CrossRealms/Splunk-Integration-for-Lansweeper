@@ -1,0 +1,57 @@
+# TODO - Confirm SQL query at final checks
+[lansweeper_onprem_data_input]
+connection = Lansweeper_DB
+disabled = 0
+index = lansweeper
+index_time_mode = current
+interval = 9 */2 * * *
+mode = batch
+query = Select Top 1000000 tblAssets.AssetID,\
+        tblAssets.AssetName,\
+        tsysAssetTypes.AssetTypename,\
+        tblAssets.Domain,\
+        Coalesce(tsysOS.OSname, tblLinuxSystem.OSRelease, tblMacOSInfo.SystemVersion) As OS,\
+        tblAssetCustom.Model,\
+        tblAssetCustom.Manufacturer,\
+        tblAssets.IPAddress,\
+        tblAssets.Username,\
+        tblAssets.Userdomain,\
+        tblAssets.BuildNumber,\
+        tblAssets.LastChanged,\
+        tblAssetGroups.AssetGroup,\
+        tblAssets.OScode,\
+        tblAssets.version,\
+        tblAssets.SiteID,\
+        tblAssets.Memory,\
+        tblAssets.Processor,\
+        tblAssets.ServiceVersion,\
+        tblAssets.LsAgentVersion,\
+        tblAssets.LastLsAgent,\
+        tsysIPLocations.IPLocation,\
+        tblAssets.Mac,\
+        tblState.Statename,\
+        tblAssets.Firstseen,\
+        tblAssets.Lastseen,\
+        tblAssets.Lasttried,\
+        tblAssets.Description,\
+        tblAssets.FQDN,\
+        tblAssetCustom.DNSName,\
+        tblAssetCustom.LastPatched,\
+        tblAssetCustom.LastFullbackup,\
+        tblAssetCustom.LastFullimage,\
+        tblAssetCustom.Serialnumber,\
+        tblAssets.Scanserver\
+        From tblAssets\
+        Inner Join tblAssetCustom On tblAssets.AssetID = tblAssetCustom.AssetID\
+        Inner Join tblAssetGroupLink On tblAssets.AssetID = tblAssetGroupLink.AssetID\
+        Inner Join tblAssetGroups On tblAssetGroups.AssetGroupID = tblAssetGroupLink.AssetGroupID\
+        Inner Join tsysAssetTypes On tsysAssetTypes.AssetType = tblAssets.Assettype\
+        Inner Join tsysIPLocations On tsysIPLocations.LocationID = tblAssets.LocationID\
+        Left Join tblADComputers On tblAssets.AssetID = tblADComputers.AssetID\
+        Inner Join tblState On tblState.State = tblAssetCustom.State\
+        Left Join tblLinuxSystem On tblAssets.AssetID = tblLinuxSystem.AssetID\
+        Left Join tsysOS On tblAssets.OScode = tsysOS.OScode\
+        Left Join tblMacOSInfo On tblAssets.AssetID = tblMacOSInfo.AssetID\
+        WHERE tblAssets.LastChanged > ?\
+        Order By tblAssets.LastChanged ASC
+sourcetype = lansweeper:asset:onprem
