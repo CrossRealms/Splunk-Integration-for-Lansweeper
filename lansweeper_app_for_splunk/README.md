@@ -73,7 +73,7 @@ RELEASE NOTES
 Version 1.1.0 (April 2021)
 * Support for data from On-Prem database support.
 * Added more important fields to dashboard.
-* TODO - do final check to Github and include all the changes.
+* Upgrade Lansweeper Add-on for Splunk to V1.1.0 before upgrading this app.
 
 
 Version 1.0.0 (Jan 2021)
