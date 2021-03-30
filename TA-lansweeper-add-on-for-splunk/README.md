@@ -115,13 +115,15 @@ DATA COLLECTION & CONFIGURATION FROM ON-PREM
 ### Configure Splunk DB Connect for Data Collection ###
 1. Make sure you install `Lansweeper Add-on for Splunk` on the server where you are configuring `Splunk DB Connect`.
     * You can download Splunk DB Connect App from <a href="https://splunkbase.splunk.com/app/2686/">here</a>.
-2. Go to `Splunk DB Connect` on Splunk Heavy Forwarder.
-3. Go to `Configuration` on the navigation of the DB Connect App.
-4. Go to identities and create a new identity.
+2. Add required driver to Splunk DB Connect App as per the lansweeper Database.
+    * You can follow this <a href="https://docs.splunk.com/Documentation/DBX/3.4.2/DeployDBX/ConfigureDBConnectsettings?ref=hk#Drivers_tab">link</a>.
+4. Go to `Splunk DB Connect` on Splunk Heavy Forwarder.
+5. Go to `Configuration` on the navigation of the DB Connect App.
+6. Go to identities and create a new identity.
     * Identity Name - Unique name of identity
     * Username - Username for the Lansweeper database
     * Password - Password for the Lansweeper database
-6. Go to `Configuration > Connections` and create a new connection.
+7. Go to `Configuration > Connections` and create a new connection.
     * Connection Name - Unique name for the database connection
     * Identify - Select the identity created in previous step.
     * Connection Type - Select appropriate database connection type
