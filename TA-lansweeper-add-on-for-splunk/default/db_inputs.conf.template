@@ -3,10 +3,9 @@
 connection = Lansweeper_DB
 disabled = 0
 index = lansweeper
-index_time_mode = dbColumn
-input_timestamp_column_number = 12
-interval = */10 * * * *
-mode = rising
+index_time_mode = current
+interval = 9 */2 * * *
+mode = batch
 query = Select Top 1000000 tblAssets.AssetID,\
         tblAssets.AssetName,\
         tsysAssetTypes.AssetTypename,\
@@ -56,7 +55,3 @@ query = Select Top 1000000 tblAssets.AssetID,\
         WHERE tblAssets.LastChanged > ?\
         Order By tblAssets.LastChanged ASC
 sourcetype = lansweeper:asset:onprem
-tail_rising_column_init_ckpt_value = {"value":"1970-01-01 00:00:00.000","columnType":93}
-tail_rising_column_name = LastChanged
-tail_rising_column_number = 12
-
