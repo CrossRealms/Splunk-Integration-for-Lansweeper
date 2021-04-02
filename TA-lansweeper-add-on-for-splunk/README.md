@@ -127,7 +127,7 @@ DATA COLLECTION & CONFIGURATION FROM ON-PREM
     * Connection Name - Unique name for the database connection
     * Identify - Select the identity created in previous step.
     * Connection Type - Select appropriate database connection type
-    * Timezone - Timezone of database server (TODO)
+    * Timezone - Timezone of database server
     * Host - Hostname of IP Address of database server
     * Port - Port number of database connection (Refer to `Configuration Required for Lansweeper Database` section above.)
     * Default Database - Use `lansweeper_db`
@@ -152,6 +152,7 @@ RELEASE NOTES
 -------------
 Version 1.1.0 (April 2021)
 * On-prem Lansweeper Support added (with database connection).
+* Added more fields collection for cloud data collection.
 
 
 Version 1.0.1 (Feb 2021)

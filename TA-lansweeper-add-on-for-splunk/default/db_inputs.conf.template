@@ -1,4 +1,4 @@
-# TODO - Confirm SQL query at final checks
+
 [lansweeper_onprem_data_input]
 connection = Lansweeper_DB
 disabled = 0
@@ -51,7 +51,5 @@ query = Select Top 1000000 tblAssets.AssetID,\
         Inner Join tblState On tblState.State = tblAssetCustom.State\
         Left Join tblLinuxSystem On tblAssets.AssetID = tblLinuxSystem.AssetID\
         Left Join tsysOS On tblAssets.OScode = tsysOS.OScode\
-        Left Join tblMacOSInfo On tblAssets.AssetID = tblMacOSInfo.AssetID\
-        WHERE tblAssets.LastChanged > ?\
-        Order By tblAssets.LastChanged ASC
+        Left Join tblMacOSInfo On tblAssets.AssetID = tblMacOSInfo.AssetID
 sourcetype = lansweeper:asset:onprem
