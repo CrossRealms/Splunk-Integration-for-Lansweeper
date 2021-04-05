@@ -12,7 +12,7 @@ The App is using data collected by the <a href="https://splunkbase.splunk.com/ap
 
 
 * Author - CrossRealms International Inc.
-* Version - 1.1.0
+* Version - 1.1.1
 * Build - 1
 * Creates Index - False
 * Uses KV Store - True. This App uses Splunk KV Store for storing some of the lookup files
@@ -70,6 +70,12 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.1.1 (April 2021)
+* Bug Fix: Updating Macro to support LS on-prem.
+* Support for data from On-Prem database support.
+* Added more important fields to dashboard.
+* Upgrade Lansweeper Add-on for Splunk to V1.1.0 before upgrading this app.
+
 Version 1.1.0 (April 2021)
 * Support for data from On-Prem database support.
 * Added more important fields to dashboard.
