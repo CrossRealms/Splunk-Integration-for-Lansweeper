@@ -6,7 +6,7 @@ https://splunkbase.splunk.com/app/5419/
 
 OVERVIEW
 --------
-The Lansweeper App for Splunk is an Splunk App that visualize the data (assets) collected by Lansweeper. It contains useful dashboards. 
+The Lansweeper App for Splunk is a Splunk App that visualizes the data (assets) collected by Lansweeper. It contains useful dashboards.
 
 The App is using data collected by the <a href="https://splunkbase.splunk.com/app/5418/">Lansweeper Add-on for Splunk</a>.
 
@@ -73,13 +73,13 @@ RELEASE NOTES
 Version 1.1.1 (April 2021)
 * Bug Fix: Updating Macro to support LS on-prem.
 * Support for data from On-Prem database support.
-* Added more important fields to dashboard.
-* Upgrade Lansweeper Add-on for Splunk to V1.1.0 before upgrading this app.
+* Added more important fields to the dashboard.
+* Upgrade Lansweeper Add-on for Splunk to V1.1.0 before upgrading this App.
 
 Version 1.1.0 (April 2021)
 * Support for data from On-Prem database support.
-* Added more important fields to dashboard.
-* Upgrade Lansweeper Add-on for Splunk to V1.1.0 before upgrading this app.
+* Added more important fields to the dashboard.
+* Upgrade Lansweeper Add-on for Splunk to V1.1.0 before upgrading this App.
 
 
 Version 1.0.0 (Jan 2021)

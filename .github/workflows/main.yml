@@ -6,7 +6,9 @@ name: "pre-release"
 on:
   push:
     branches:
-      - "master"
+      - '*'         # matches every branch that doesn't contain a '/'
+      - '*/*'       # matches every branch containing a single '/'
+      - '**'        # matches every branch
 
 jobs:
   pre-release:
@@ -19,10 +21,14 @@ jobs:
         run: |
           echo "Started generating builds."
       
-
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      
       - uses: actions/checkout@v2
         with:
-          ref: master
+          ref: ${{ steps.extract_branch.outputs.branch }}
           path: repodir
       
       
