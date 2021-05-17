@@ -21,7 +21,10 @@ class Lansweeper:
         self.access_token = access_token
         self.refresh_token = refresh_token
         self.proxy_settings = proxy_settings
-        self.graphql_url = 'https://api.lansweeper.com/api/integrations/graphql'
+        #for Lansweeper V1
+        #self.graphql_url = 'https://api.lansweeper.com/api/integrations/graphql' 
+        #For Lansweeper V2
+        self.graphql_url = 'https://api.lansweeper.com/api/v2/graphql'
         self.auth_url = 'https://api.lansweeper.com/api/integrations/oauth/token'
         self.logger = logger
 
@@ -145,6 +148,56 @@ class Lansweeper:
             "assetCustom.serialNumber",
             "assetCustom.model",
             "assetCustom.manufacturer",
+            "assetBasicInfo.name",
+            "assetBasicInfo.type",
+            "assetBasicInfo.firstSeen",
+            "assetBasicInfo.lastChanged",
+            "assetBasicInfo.lastSeen",
+            "assetBasicInfo.fqdn",
+            "assetBasicInfo.ipAddress",
+            "assetBasicInfo.mac",
+            "assetBasicInfo.userDomain",
+            "assetBasicInfo.userName",
+            "assetBasicInfo.domain",
+            "assetBasicInfo.lsAgentVersion",
+            "assetBasicInfo.lastLsAgent",
+            "assetBasicInfo.description",
+            "assetGroups.name",
+            "operatingSystem.buildNumber",
+            "operatingSystem.buildRevNumber",
+            "operatingSystem.version",
+            "operatingSystem.totalVisibleMemorySize",
+            "processors.type",
+            "processors.name",
+            "operatingSystem.caption",
+            "ipLocation.ipLocation"
+            ]){
+            total
+            items
+                pagination {
+                limit
+                next
+                page
+                }
+            }}
+            }""" % (site_id, cursor, page)
+
+        '''
+        Lansweeper API V1
+        -----------------
+        Query : 
+
+        query = """query getAssetResources{ 
+            site(id: "{%s}"){
+            assetResources(pagination:{ 
+                limit: 100
+                cursor: "%s"
+                page: %s
+            }, fields: [
+            "assetCustom.stateName",
+            "assetCustom.serialNumber",
+            "assetCustom.model",
+            "assetCustom.manufacturer",
             "asset.assetId",
             "asset.assetName",
             "asset.assetTypeName",
@@ -182,7 +235,7 @@ class Lansweeper:
             }}
             }""" % (site_id, cursor, page)
 
-        '''
+
         Information about fields of assets
         -----------------------------------
         Note - We are not fetching all the fields as of now as currently the API has limitation where maximum of 30 fields can be retrieved.
@@ -216,6 +269,122 @@ class Lansweeper:
         "asset.lastTried"
         "assetCustom.dnsName"
         "assetCustom.lastPatched"
+        ==================================================================
+
+        Lansweeper API V2
+        -----------------
+        Query : 
+
+        query = """query getAssetResources{ 
+            site(id: "{%s}"){
+            assetResources(pagination:{ 
+                limit: 100
+                cursor: "%s"
+                page: %s
+            }, fields: [
+            "assetCustom.stateName",
+            "assetCustom.serialNumber",
+            "assetCustom.model",
+            "assetCustom.manufacturer",
+            "assetBasicInfo.name",
+            "assetBasicInfo.type",
+            "assetBasicInfo.firstSeen",
+            "assetBasicInfo.lastChanged",
+            "assetBasicInfo.lastSeen",
+            "assetBasicInfo.fqdn",
+            "assetBasicInfo.ipAddress",
+            "assetBasicInfo.mac",
+            "assetBasicInfo.userDomain",
+            "assetBasicInfo.userName",
+            "assetBasicInfo.domain",
+            "assetBasicInfo.lsAgentVersion",
+            "assetBasicInfo.lastLsAgent",
+            "assetBasicInfo.description",
+            "assetGroups.name",
+            "operatingSystem.buildNumber",
+            "operatingSystem.buildRevNumber",
+            "operatingSystem.version",
+            "operatingSystem.totalVisibleMemorySize",
+            "processors.type",
+            "processors.name",
+            "operatingSystem.caption",
+            "ipLocation.ipLocation"
+            ]){
+            total
+            items
+                pagination {
+                limit
+                next
+                page
+                }
+            }}
+            }""" % (site_id, cursor, page)
+
+        Information about fields of assets
+        -----------------------------------
+        Note - We are not fetching all the fields as of now as currently the API has limitation where maximum of 30 fields can be retrieved.
+
+        "assetCustom.stateName" -  Asset is active or not
+        "assetCustom.serialNumber" - serialNumber
+        "assetCustom.model" -  Model
+        "assetCustom.manufacturer" - Manufacturer 
+        "assetBasicInfo.name" - Name
+        "assetBasicInfo.type" - Type
+        "assetBasicInfo.firstSeen" - FirstSeen 
+        "assetBasicInfo.lastChanged" - LastChanged
+        "assetBasicInfo.lastSeen" - Lastseen
+        "assetBasicInfo.fqdn" - FQDN
+        "assetBasicInfo.ipAddress" - IPAddress
+        "assetBasicInfo.mac" - Mac Address
+        "assetBasicInfo.userDomain" - User Domain
+        "assetBasicInfo.userName" - User Name
+        "assetBasicInfo.domain" - Asset Domain
+        "assetBasicInfo.lsAgentVersion" - Lansweeper Agent version
+        "assetBasicInfo.lastLsAgent" - Lansweeper Agent Last Run
+        "assetBasicInfo.description" - Asset Description
+        "assetGroups.name" - Asset Group Name
+        "operatingSystem.buildNumber" - BuildNumber
+        "operatingSystem.buildRevNumber" - Not sure what it represents
+        "operatingSystem.version" - Operating system version for Windows
+        "operatingSystem.totalVisibleMemorySize" - Total Memory Size in KB
+        "processors.type" - Processor Type
+        "processors.name" - Processor Name
+        "operatingSystem.caption" - Operating system name
+        "ipLocation.ipLocation" - IPlocation 
+
+        Changes from V1 to V2
+        ---------------------
+
+        "asset.serviceVersion",                 --> No details in v2
+        "asset.assetId",                        --> Not exists            --> in V2 there is a field called id
+        "macOsInfo.systemVersion",              --> Need to check again   --> "operatingSystem.version"
+        "linuxSystem.osRelease",                --> Need to check again   --> "operatingSystem.caption"
+        "asset.memory",                         --> Need to check again   --> "operatingSystem.totalVisibleMemorySize"
+        "asset.processor",                      --> Need to check again   --> "processors{}.name"
+        "asset.buildNumber",                    --> Need to check again   --> "operatingSystem.buildRevNumber"
+        "asset.assetName",                      --> field changed to      --> "assetBasicInfo.name"    
+        "asset.assetTypeName",                  --> field changed to      --> "assetBasicInfo.type"
+        "asset.assetGroups.groupName",          --> field changed to      --> "assetGroups.name"
+        "asset.version",                        --> field changed to      --> "operatingSystem.version"
+        "asset.osCodeId",                       --> field changed to      --> "operatingSystem.buildNumber"
+        "operatingSystems.caption",             --> field changed to      --> "operatingSystem.caption"
+        "asset.ipLocation.ipLocation"           --> field changed to      --> "ipLocation.ipLocation"
+        "asset.firstSeen",                      --> field changed to      --> "assetBasicInfo.firstSeen"
+        "asset.lastChanged",                    --> field changed to      --> "assetBasicInfo.lastChanged"
+        "asset.lastSeen",                       --> field changed to      --> "assetBasicInfo.lastSeen"
+        "asset.fqdn",                           --> field changed to      --> "assetBasicInfo.fqdn"
+        "asset.ipAddress",                      --> field changed to      --> "assetBasicInfo.ipAddress"
+        "asset.mac",                            --> field changed to      --> "assetBasicInfo.mac"
+        "asset.userDomain",                     --> field changed to      --> "assetBasicInfo.userDomain"
+        "asset.userName",                       --> field changed to      --> "assetBasicInfo.userName"
+        "asset.assetDomain",                    --> field changed to      --> "assetBasicInfo.assetDomain"
+        "asset.lsAgentVersion",                 --> field changed to      --> "assetBasicInfo.lsAgentVersion"
+        "asset.lastLsAgent",                    --> field changed to      --> "assetBasicInfo.lastLsAgent"
+        "asset.description",                    --> field changed to      --> "assetBasicInfo.description"
+        "assetCustom.stateName",                --> No change
+        "assetCustom.serialNumber",             --> No change
+        "assetCustom.model",                    --> No change
+        "assetCustom.manufacturer",             --> No change
         '''
 
         try:
