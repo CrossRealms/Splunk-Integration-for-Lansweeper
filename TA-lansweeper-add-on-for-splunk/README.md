@@ -12,7 +12,7 @@ Use the <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Spl
 
 
 * Author - CrossRealms International Inc.
-* Version - 1.2.0
+* Version - 1.2.1
 * Build - 1
 * Creates Index - False
 * Compatible with:
@@ -150,6 +150,9 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.2.1 (June 2021)
+* Changing SourceType for API V2 to sourcetype=lansweeper:asset:v2
+
 Version 1.2.0 (May 2021)
 * Changing Lansweeper API from V1 to V2
 

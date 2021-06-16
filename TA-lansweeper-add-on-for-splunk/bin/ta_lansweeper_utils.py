@@ -138,7 +138,7 @@ def write_event(asset_data, site_name, ew, index, logger):
     :param logger: Logger object
     """
 
-    sourcetype = 'lansweeper:asset'
+    sourcetype = 'lansweeper:asset:v2'
     try:
         logger.info('Writting assets data to Splunk for site={} asset_count={}'.format(site_name, len(asset_data)))
         for asset in asset_data:
