@@ -53,11 +53,11 @@ The Lansweeper Add-on needs to be installed on the Search Head and heavy forward
 DATA COLLECTION & CONFIGURATION FROM CLOUD
 ------------------------------------------------------------
 ### Lansweeper API Documentation ###
-* https://www.lansweeper.com/kb-category/api/index.html
+* https://docs.lansweeper.com/docs/api/intro-to-graphql
 
 
 ### Configuration Required on Lansweeper Cloud ###
-* Reference - https://www.lansweeper.com/kb-category/api/auth.html
+* Reference - https://docs.lansweeper.com/docs/api/authenticate
 
 
 ### Configure Account ###
