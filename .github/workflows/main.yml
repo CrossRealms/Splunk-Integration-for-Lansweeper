@@ -68,7 +68,7 @@ jobs:
             repodir/lansweeper_app_for_splunk.tgz
       
       - uses: actions/setup-python@v2
-      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test5
+      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test6
         with:
           app_build: repodir/lansweeper_app_for_splunk.tgz
           splunkbase_username: ${{ secrets.splunkbase_username }}
