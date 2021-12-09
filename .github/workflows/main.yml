@@ -67,21 +67,24 @@ jobs:
           path: |
             repodir/lansweeper_app_for_splunk.tgz
       
+      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test1
+        with:
+          app_build: repodir/lansweeper_app_for_splunk.tgz
+          splunkbase_username: ${{ secrets.splunkbase_username }}
+          splunkbase_password: ${{ secrets.splunkbase_password }}
+          report_prefix: "ta"
+      
       - uses: splunk/appinspect-cli-action@v1
         with:
           app_path: 'repodir/lansweeper_app_for_splunk.tgz'
           result_file: 'repodir/app-appinspect-mode-test.json'
-          
-      - uses: splunk/appinspect-cli-action@v1
-        if: always()
-        with:
-          app_path: 'repodir/TA-lansweeper-add-on-for-splunk.tgz'
-          result_file: 'repodir/ta-appinspect-mode-test.json'
-          
+
       - uses: actions/upload-artifact@v2
         if: always()
         with:
           name: "app_inspect_reports"
           path: |
             repodir/app-appinspect-mode-test.json
-            repodir/ta-appinspect-mode-test.json
+            ta_app_inspect_check.html
+            ta_cloud_inspect_check.html
+            ta_ssai_inspect_check.html
