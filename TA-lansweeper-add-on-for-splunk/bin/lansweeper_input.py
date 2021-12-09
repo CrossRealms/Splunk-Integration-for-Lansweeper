@@ -76,12 +76,11 @@ class LANSWEEPER_INPUT(smi.Script):
         sites = []
 
         # Note - Do not uncomment below line in the production
-        # logger.info('Access token={}, ||| Refresh token={}'.format(access_token, refresh_token))
+        # logger.debug('Access token={}, ||| Refresh token={}'.format(access_token, refresh_token))
 
         lansweeper = Lansweeper(client_id=client_id, client_secret=client_secret, access_token=access_token, refresh_token=refresh_token, proxy_settings=proxy_settings, logger=logger)
-        #Get site id
-        # logger.info('Refresh token={}'.format(lansweeper.refresh_token))
         try:
+            # Get site id
             status_code, response = lansweeper.get_site_id(site_name)
             if status_code != 200:
                 is_expired_response = lansweeper.is_token_expired(status_code, response.text)
@@ -94,20 +93,21 @@ class LANSWEEPER_INPUT(smi.Script):
                     except Exception as exception:
                         logger.warning('Error while updating the access token and refresh token in the conf file, error={}'.format(exception))
                     
+                    logger.debug("Retrying for site-id with new tokens.")
                     status_code, response = lansweeper.get_site_id(site_name)
                     if status_code != 200:
-                        logger.error('Error while fetching the site id for site={}, status code={} response={}'.format(site_name, status_code, response))
+                        logger.error('Error while fetching the site id for site={}, status code={} response={}'.format(site_name, status_code, response.text))
                         sys.exit(1)
                     else:
                         sites = response
                 else:
-                    logger.error('Error while fetching the site id for site={}, status code={} response={}'.format(site_name, status_code, response))
+                    logger.error('Error while fetching the site id for site={}, status code={} response={}'.format(site_name, status_code, response.text))
                     sys.exit(1)
             else:
                 logger.info('Successfully fetch the site code for site={}'.format(site_name))
                 sites = response
         except Exception as exception:
-            logger.exception('Error while fetching the site id for site={}'.format(site_name))
+            logger.exception('Error while fetching the site id for site={}, exception={}'.format(site_name,exception))
             sys.exit(1)
         
         logger.info("Site id: {}".format(sites))
@@ -127,8 +127,8 @@ class LANSWEEPER_INPUT(smi.Script):
                         is_expired_response = lansweeper.is_token_expired(response_code, response.text)
                         if is_expired_response:
                             lansweeper.access_token = is_expired_response['access_token']
-                            # Updating the access token and refresh token in the conf files
                             try:
+                                # Updating the access token and refresh token in the conf files
                                 update_access_token(access_token=is_expired_response['access_token'], refresh_token=refresh_token, client_secret=client_secret, session_key=session_key, stanza_name=account_name)
                                 logger.info('Successfully updated the new access token and refresh token in the conf file')
                             except Exception as exception:
