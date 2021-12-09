@@ -68,6 +68,7 @@ jobs:
             repodir/lansweeper_app_for_splunk.tgz
       
       - uses: actions/setup-python@v2
+      - run: pip install requests
       - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test7
         with:
           app_build: repodir/lansweeper_app_for_splunk.tgz
