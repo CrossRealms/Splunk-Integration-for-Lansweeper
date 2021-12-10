@@ -22,14 +22,14 @@ jobs:
     runs-on: "ubuntu-latest"
     
     steps:
-      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test16
+      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test17
         with:
           app_dir: lansweeper_app_for_splunk
           app_build_name: "app"
           splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
           splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
 
-      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test16
+      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test17
         with:
           app_dir: TA-lansweeper-add-on-for-splunk
           app_build_name: "ta"
