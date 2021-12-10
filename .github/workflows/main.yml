@@ -24,26 +24,26 @@ jobs:
     steps:
       - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test22
         env:
-          env_app_dir: TA-lansweeper-add-on-for-splunk
+          env_app_dir: "TA-lansweeper-add-on-for-splunk"
           env_app_build_name: "ta"
-          env_splunkbase_username: ${{ secrets.splunkbase_username }}
-          env_splunkbase_password: ${{ secrets.splunkbase_password }}
+          env_splunkbase_username: "${{ secrets.splunkbase_username }}"
+          env_splunkbase_password: "${{ secrets.splunkbase_password }}"
         with:
-          app_dir: lansweeper_app_for_splunk
+          app_dir: "lansweeper_app_for_splunk"
           app_build_name: "app"
-          splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
-          splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
+          splunkbase_username: "${{ secrets.SPLUNKBASE_USERNAME }}"
+          splunkbase_password: "${{ secrets.SPLUNKBASE_PASSWORD }}"
         
 
       - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test22
         env:
-          env_app_dir: TA-lansweeper-add-on-for-splunk
+          env_app_dir: "TA-lansweeper-add-on-for-splunk"
           env_app_build_name: "ta"
-          env_splunkbase_username: ${{ secrets.splunkbase_username }}
-          env_splunkbase_password: ${{ secrets.splunkbase_password }}
+          env_splunkbase_username: "${{ secrets.splunkbase_username }}"
+          env_splunkbase_password: "${{ secrets.splunkbase_password }}"
         with:
-          app_dir: TA-lansweeper-add-on-for-splunk
+          app_dir: "TA-lansweeper-add-on-for-splunk"
           app_build_name: "ta"
-          splunkbase_username: ${{ secrets.splunkbase_username }}
-          splunkbase_password: ${{ secrets.splunkbase_password }}
+          splunkbase_username: "${{ secrets.splunkbase_username }}"
+          splunkbase_password: "${{ secrets.splunkbase_password }}"
         
