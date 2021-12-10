@@ -22,71 +22,16 @@ jobs:
     runs-on: "ubuntu-latest"
     
     steps:
-      # ...
-      - name: "Generate App and TA Builds"
-        run: |
-          echo "Started generating builds."
-      
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
-      
-      - uses: actions/checkout@v2
+      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test13
         with:
-          ref: ${{ steps.extract_branch.outputs.branch }}
-          path: repodir
-      
-      
-      - name: "Generate TA Build"
-        run: |
-          cd repodir
-          find TA-lansweeper-add-on-for-splunk -type f -exec chmod 644 '{}' \;
-          find TA-lansweeper-add-on-for-splunk -type d -exec chmod 755 '{}' \;
-          tar -czf TA-lansweeper-add-on-for-splunk.tgz TA-lansweeper-add-on-for-splunk
-          cd ..
-          
-      - uses: actions/upload-artifact@v2
-        with:
-          name: "TA Build"
-          path: |
-            repodir/TA-lansweeper-add-on-for-splunk.tgz
-    
-
-      - name: "Generate App Build"
-        run: |
-          cd repodir
-          find lansweeper_app_for_splunk -type f -exec chmod 644 '{}' \;
-          find lansweeper_app_for_splunk -type d -exec chmod 755 '{}' \;
-          tar -czf lansweeper_app_for_splunk.tgz lansweeper_app_for_splunk
-          cd ..
-          
-      - uses: actions/upload-artifact@v2
-        with:
-          name: "App Build"
-          path: |
-            repodir/lansweeper_app_for_splunk.tgz
-      
-      - uses: actions/setup-python@v2
-      - run: pip install requests
-      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test12
-        with:
-          app_build: repodir/lansweeper_app_for_splunk.tgz
+          app_dir: lansweeper_app_for_splunk
+          app_build_name: "app"
           splunkbase_username: ${{ secrets.splunkbase_username }}
           splunkbase_password: ${{ secrets.splunkbase_password }}
-          report_prefix: "ta"
-      
-      - uses: splunk/appinspect-cli-action@v1
-        with:
-          app_path: 'repodir/lansweeper_app_for_splunk.tgz'
-          result_file: 'repodir/app-appinspect-mode-test.json'
 
-      - uses: actions/upload-artifact@v2
-        if: always()
+      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test13
         with:
-          name: "app_inspect_reports"
-          path: |
-            repodir/app-appinspect-mode-test.json
-            ta_app_inspect_check.html
-            ta_cloud_inspect_check.html
-            ta_ssai_inspect_check.html
+          app_dir: TA-lansweeper-add-on-for-splunk
+          app_build_name: "ta"
+          splunkbase_username: ${{ secrets.splunkbase_username }}
+          splunkbase_password: ${{ secrets.splunkbase_password }}
