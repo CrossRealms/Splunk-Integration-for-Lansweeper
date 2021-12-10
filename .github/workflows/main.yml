@@ -22,10 +22,16 @@ jobs:
     runs-on: "ubuntu-latest"
     
     steps:
+      - name: "checking secrets"
+        shell: bash
+        run: |
+          echo "${{ secrets.SPLUNKBASE_USERNAME }} - ${{ secrets.SPLUNKBASE_PASSWORD }}"
+          echo "${{secrets.splunkbase_username}} - ${{secrets.splunkbase_passsword}}"
+
       - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test22
         env:
-          env_app_dir: "TA-lansweeper-add-on-for-splunk"
-          env_app_build_name: "ta"
+          env_app_dir: "lansweeper_app_for_splunk"
+          env_app_build_name: "app"
           env_splunkbase_username: "${{ secrets.splunkbase_username }}"
           env_splunkbase_password: "${{ secrets.splunkbase_password }}"
         with:
