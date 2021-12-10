@@ -26,7 +26,7 @@ jobs:
         shell: bash
         run: |
           echo "${{ secrets.SPLUNKBASE_USERNAME }} - ${{ secrets.SPLUNKBASE_PASSWORD }}"
-          echo "${{secret.splunkbase_username}} - ${{secret.splunkbase_passsword}}"
+          echo "${{secrets.splunkbase_username}} - ${{secrets.splunkbase_passsword}}"
 
       - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test25
         env:
