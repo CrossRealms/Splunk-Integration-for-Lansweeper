@@ -12,8 +12,6 @@ Use the <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Spl
 
 
 * Author - CrossRealms International Inc.
-* Version - 1.2.2
-* Build - 1
 * Creates Index - False
 * Compatible with:
    * Splunk Enterprise version: 8.1, 8.0
@@ -150,6 +148,10 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.2.3 (Dec 2021)
+* Fixed the data collection stopped working (due to token expire) issue. (Root Cause: Change in the API response format.)
+* Added more debug logs in data-collection input code.
+
 Version 1.2.2 (Nov 2021)
 * Cloud compatibility issue (Missing trigger in app.conf) fixed.
 

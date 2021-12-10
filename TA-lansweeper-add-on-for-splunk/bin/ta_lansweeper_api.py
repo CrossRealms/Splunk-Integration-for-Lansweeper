@@ -27,6 +27,7 @@ class Lansweeper:
         self.graphql_url = 'https://api.lansweeper.com/api/v2/graphql'
         self.auth_url = 'https://api.lansweeper.com/api/integrations/oauth/token'
         self.logger = logger
+        self.logger.debug("Lansweeper class initialized.")
 
     def get_refresh_token(self):
         """
@@ -44,9 +45,10 @@ class Lansweeper:
             if response.status_code == 200:
                 response_json = response.json()
                 return 200, response_json
+            self.logger.debug("Non 200 status code while getting refresh token. status_code={}, response={}".format(response.status_code, response.text))
             return response.status_code, response
         except Exception as exception:
-            self.logger.error(
+            self.logger.exception(
                 'Error while refreshing the access token, error={}'.format(exception))
             sys.exit(1)
 
@@ -70,9 +72,11 @@ class Lansweeper:
         }
         }"""
         try:
+            self.logger.debug("Request for site-id: query:{}".format(query))
             response = requests.post(self.graphql_url, json={
                                      'query': query}, headers=headers, proxies=self.proxy_settings)
             status_code = response.status_code
+            self.logger.debug("Getting site-id: status_code:{}, response_text:{}".format(status_code, response.text))
 
             if status_code != 200:
                 self.logger.warning('Error while fetching the site id for site={} status code= {}'.format(
@@ -86,10 +90,12 @@ class Lansweeper:
         try:
             response_json = response.json()
             if site_name == '*':
+                self.logger.debug("Site-id found in the response: {}".format(response_json['data']))
                 return 200, response_json['data']['me']['profiles']
 
             sites = []
             for profile in response_json['data']['me']['profiles']:
+                self.logger.debug("Multiple site-id found in the response: {}".format(response_json['data']))
                 if profile['site']['name'] in site_name:
                     sites.append(
                         {profile['site']['name']: profile['site']['id']})
@@ -110,18 +116,23 @@ class Lansweeper:
             response = json.loads(response)
             self.logger.info('Checking if the access token is expired')
 
-            if status_code == 400 and response.get('errors', [])[0].get('extensions', {}).get('code') == 'UNAUTHENTICATED':
+            if status_code == 400:
+            #  and ((response.get('errors', [])[0].get('extensions', {}).get('code') == 'UNAUTHENTICATED') or (response.get('errors', [])[0].get('extensions', {}).get('extensions', {}).get('code') == 'UNAUTHENTICATED')):
                 self.logger.info(
                     'Access token is expired. Calling the refresh token API')
                 status, response = self.get_refresh_token()
 
                 if status != 200:
                     self.logger.error(
-                        'Error while refreshing the access token, status code={} response={}'.format(status, response))
+                        'Error while refreshing the access token, status code={} response={}'.format(status, response.text))
                     return False
 
-                self.logger.info('Successfully refreshed the access token')
+                self.logger.info('Successfully refreshed the access token.')
+                # Do not uncomment below line
+                # self.logger.debug("access_token: {}".format(response.get('access_token')))
                 return {'access_token': response.get('access_token')}
+            else:
+                self.logger.warning("Non 400 status code. status_code={}, response={}".format(status_code, response))
         except Exception as exception:
             self.logger.exception(
                 'Error while checking if the access token is expired, error={}'.format(exception))
@@ -138,7 +149,7 @@ class Lansweeper:
         headers = {'Content-Type': 'application/json',
                    'Authorization': 'Bearer ' + self.access_token}
         query = """query getAssetResources{ 
-            site(id: "{%s}"){
+            site(id: "%s"){
             assetResources(pagination:{ 
                 limit: 100
                 cursor: "%s"
@@ -388,9 +399,11 @@ class Lansweeper:
         '''
 
         try:
+            self.logger.debug("Request for assets_info: query:{}".format(query))
             response = requests.post(self.graphql_url, json={
                                      'query': query}, headers=headers, proxies=self.proxy_settings)
-            # self.logger.info('Asset Status={}, response={}'.format(response.status_code, response.text))
+            self.logger.debug('Fetching assets: Status={}'.format(response.status_code))
+            # self.logger.debug('Fetching assets: Response={}'.format(response.text))
             if response.status_code != 200 or response.json().get('errors'):
                 # save checkpoint
                 return False, response.status_code, response
