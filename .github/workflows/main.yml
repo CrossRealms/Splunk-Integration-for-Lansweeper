@@ -28,7 +28,7 @@ jobs:
           echo "${{ secrets.SPLUNKBASE_USERNAME }} - ${{ secrets.SPLUNKBASE_PASSWORD }}"
           echo "${{secrets.splunkbase_username}} - ${{secrets.splunkbase_passsword}}"
 
-      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test25
+      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test27
         env:
           env_app_dir: "lansweeper_app_for_splunk"
           env_app_build_name: "app"
@@ -41,7 +41,7 @@ jobs:
           splunkbase_password: "${{ secrets.SPLUNKBASE_PASSWORD }}"
         
 
-      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test25
+      - uses: VatsalJagani/Splunk-App-Inspect-Check-Github-Action@test27
         env:
           env_app_dir: "TA-lansweeper-add-on-for-splunk"
           env_app_build_name: "ta"
