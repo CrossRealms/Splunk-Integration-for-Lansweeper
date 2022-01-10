@@ -22,18 +22,18 @@ jobs:
     runs-on: "ubuntu-latest"
     
     steps:
-      - uses: VatsalJagani/splunk-app-action@v0.4
+      - uses: VatsalJagani/splunk-app-action@v0.6
         with:
           app_dir: "lansweeper_app_for_splunk"
-          app_build_name: "app"
+          app_build_name: "lansweeper_app_for_splunk"
           splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
           splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
         
 
-      - uses: VatsalJagani/splunk-app-action@v0.4
+      - uses: VatsalJagani/splunk-app-action@v0.6
         with:
           app_dir: "TA-lansweeper-add-on-for-splunk"
-          app_build_name: "ta"
+          app_build_name: "TA-lansweeper-add-on-for-splunk"
           splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
           splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
         
