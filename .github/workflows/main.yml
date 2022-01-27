@@ -22,66 +22,18 @@ jobs:
     runs-on: "ubuntu-latest"
     
     steps:
-      # ...
-      - name: "Generate App and TA Builds"
-        run: |
-          echo "Started generating builds."
-      
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
-      
-      - uses: actions/checkout@v2
+      - uses: VatsalJagani/splunk-app-action@v0.6
         with:
-          ref: ${{ steps.extract_branch.outputs.branch }}
-          path: repodir
-      
-      
-      - name: "Generate TA Build"
-        run: |
-          cd repodir
-          find TA-lansweeper-add-on-for-splunk -type f -exec chmod 644 '{}' \;
-          find TA-lansweeper-add-on-for-splunk -type d -exec chmod 755 '{}' \;
-          tar -czf TA-lansweeper-add-on-for-splunk.tgz TA-lansweeper-add-on-for-splunk
-          cd ..
-          
-      - uses: actions/upload-artifact@v2
-        with:
-          name: "TA Build"
-          path: |
-            repodir/TA-lansweeper-add-on-for-splunk.tgz
-    
+          app_dir: "lansweeper_app_for_splunk"
+          app_build_name: "lansweeper_app_for_splunk"
+          splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
+          splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
+        
 
-      - name: "Generate App Build"
-        run: |
-          cd repodir
-          find lansweeper_app_for_splunk -type f -exec chmod 644 '{}' \;
-          find lansweeper_app_for_splunk -type d -exec chmod 755 '{}' \;
-          tar -czf lansweeper_app_for_splunk.tgz lansweeper_app_for_splunk
-          cd ..
-          
-      - uses: actions/upload-artifact@v2
+      - uses: VatsalJagani/splunk-app-action@v0.6
         with:
-          name: "App Build"
-          path: |
-            repodir/lansweeper_app_for_splunk.tgz
-      
-      - uses: splunk/appinspect-cli-action@v1
-        with:
-          app_path: 'repodir/lansweeper_app_for_splunk.tgz'
-          result_file: 'repodir/app-appinspect-mode-test.json'
-          
-      - uses: splunk/appinspect-cli-action@v1
-        if: always()
-        with:
-          app_path: 'repodir/TA-lansweeper-add-on-for-splunk.tgz'
-          result_file: 'repodir/ta-appinspect-mode-test.json'
-          
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: "app_inspect_reports"
-          path: |
-            repodir/app-appinspect-mode-test.json
-            repodir/ta-appinspect-mode-test.json
+          app_dir: "TA-lansweeper-add-on-for-splunk"
+          app_build_name: "TA-lansweeper-add-on-for-splunk"
+          splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
+          splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
+        
