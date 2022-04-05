@@ -181,7 +181,9 @@ class Lansweeper:
             "processors.type",
             "processors.name",
             "operatingSystem.caption",
-            "ipLocation.ipLocation"
+            "ipLocation.ipLocation",
+            "antiviruses.name",
+            "antiviruses.enabled"
             ]){
             total
             items
@@ -416,6 +418,10 @@ class Lansweeper:
                 asset['id'] = item['_id']
                 if '_id' in asset:
                     del asset['_id']
+                for i in asset.get('antiviruses', []):
+                # If antivirus item does not have enabled key then set it to unknown
+                    if "enabled" not in i:
+                        i["enabled"] = "unknown"
                 assets.append(asset)
             return True, cursor, assets
         except Exception as exception:

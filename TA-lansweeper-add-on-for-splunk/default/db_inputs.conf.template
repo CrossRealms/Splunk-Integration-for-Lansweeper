@@ -40,7 +40,9 @@ query = Select Top 1000000 tblAssets.AssetID,\
         tblAssetCustom.LastFullbackup,\
         tblAssetCustom.LastFullimage,\
         tblAssetCustom.Serialnumber,\
-        tblAssets.Scanserver\
+        tblAssets.Scanserver,\
+        tblAntivirus.DisplayName as antivirus_name,\
+        tblAntivirus.onAccessScanningEnabled as antivirus_enabled\
         From tblAssets\
         Inner Join tblAssetCustom On tblAssets.AssetID = tblAssetCustom.AssetID\
         Inner Join tblAssetGroupLink On tblAssets.AssetID = tblAssetGroupLink.AssetID\
@@ -51,5 +53,6 @@ query = Select Top 1000000 tblAssets.AssetID,\
         Inner Join tblState On tblState.State = tblAssetCustom.State\
         Left Join tblLinuxSystem On tblAssets.AssetID = tblLinuxSystem.AssetID\
         Left Join tsysOS On tblAssets.OScode = tsysOS.OScode\
-        Left Join tblMacOSInfo On tblAssets.AssetID = tblMacOSInfo.AssetID
+        Left Join tblMacOSInfo On tblAssets.AssetID = tblMacOSInfo.AssetID\
+        Left Join tblAntivirus On tblAssets.AssetID = tblAntivirus.AssetID
 sourcetype = lansweeper:asset:onprem
