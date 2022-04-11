@@ -149,8 +149,12 @@ To uninstall app, user can follow below steps:
 RELEASE NOTES
 -------------
 Version 1.3.0 (Apr 2022)
-* Added support to collect antivirus details in both DBConenct and Modular inputs.
+* Added support to collect antivirus details in both DB Connect input and API input.
 * Added props/field-extraction for the Antivirus fields
+
+Upgrade Guide from Version 1.2.x to 1.3.0
+* The API input will collect the antivirus details from Lansweeper without any manual intervention.
+* The DB Connect input will require updating the SQL query of the input. Find the new query in the `db_inputs.conf.template` file.
 
 Version 1.2.3 (Dec 2021)
 * Fixed the data collection stopped working (due to token expire) issue. (Root Cause: Change in the API response format.)
