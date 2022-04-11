@@ -148,6 +148,10 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.3.0 (Apr 2022)
+* Added support to collect antivirus details in both DBConenct and Modular inputs.
+* Added props/field-extraction for the Antivirus fields
+
 Version 1.2.3 (Dec 2021)
 * Fixed the data collection stopped working (due to token expire) issue. (Root Cause: Change in the API response format.)
 * Added more debug logs in data-collection input code.
