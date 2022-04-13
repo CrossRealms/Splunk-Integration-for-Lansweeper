@@ -3,9 +3,8 @@
         "name": "TA-lansweeper-add-on-for-splunk",
         "displayName": "Lansweeper Add-on for Splunk",
         "version": "1.3.0",
-        "apiVersion": "3.0.0",
         "restRoot": "TA_lansweeper_add_on_for_splunk",
-        "schemaVersion": "0.0.1"
+        "schemaVersion": "0.0.3"
     },
     "pages": {
         "configuration": {
@@ -24,10 +23,6 @@
                             {
                                 "field": "client_id",
                                 "label": "Client ID"
-                            },
-                            {
-                                "field": "redirect_url",
-                                "label": "Redirect URL"
                             }
                         ],
                         "actions": [
@@ -58,14 +53,14 @@
                             ]
                         },
                         {
-                            "type":"text",
-                            "label":"Endpoint URL",
-                            "help":"Enter the endpoint URL.",
-                            "field":"endpoint",
-                            "options":{
-                                "display":false
+                            "type": "text",
+                            "label": "Endpoint URL",
+                            "help": "Enter the endpoint URL.",
+                            "field": "endpoint",
+                            "options": {
+                                "display": false
                             },
-                            "defaultValue":"app.lansweeper.com"
+                            "defaultValue": "app.lansweeper.com"
                         },
                         {
                             "type": "oauth",
@@ -98,13 +93,11 @@
                                 ],
                                 "auth_code_endpoint": "/authorize-app/",
                                 "access_token_endpoint": "/api/integrations/oauth/token",
-                                "oauth_timeout": 30
+                                "oauth_timeout": 30,
+                                "oauth_state_enabled": false
                             }
                         }
-                    ],
-                    "hook":{
-                        "src" : "account_hook"
-                    }
+                    ]
                 },
                 {
                     "name": "proxy",
@@ -372,7 +365,9 @@
                             "required": true,
                             "type": "multipleSelect",
                             "options": {
-                                "dependencies": ["account_name"],
+                                "dependencies": [
+                                    "account_name"
+                                ],
                                 "createSearchChoice": true,
                                 "endpointUrl": "TA_lansweeper_rh_sites"
                             },

@@ -35,18 +35,22 @@ fields = [
         )
     ), 
     field.RestField(
-        'site',
-        required=True,
-        encrypted=False,
-        default=None
-    ), 
-    field.RestField(
         'account_name',
         required=True,
         encrypted=False,
         default=None,
         validator=None
-    ),
+    ), 
+    field.RestField(
+        'site',
+        required=True,
+        encrypted=False,
+        default=None,
+        validator=validator.String(
+            max_len=8192, 
+            min_len=0, 
+        )
+    ), 
 
     field.RestField(
         'disabled',
