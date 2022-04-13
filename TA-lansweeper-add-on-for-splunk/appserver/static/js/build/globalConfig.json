@@ -23,10 +23,6 @@
                             {
                                 "field": "client_id",
                                 "label": "Client ID"
-                            },
-                            {
-                                "field": "redirect_url",
-                                "label": "Redirect URL"
                             }
                         ],
                         "actions": [
@@ -101,10 +97,7 @@
                                 "oauth_state_enabled": false
                             }
                         }
-                    ],
-                    "hook": {
-                        "src": "account_hook"
-                    }
+                    ]
                 },
                 {
                     "name": "proxy",

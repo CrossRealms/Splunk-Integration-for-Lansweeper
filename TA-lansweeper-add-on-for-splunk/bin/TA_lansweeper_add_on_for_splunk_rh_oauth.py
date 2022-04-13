@@ -56,8 +56,9 @@ class ta_lansweeper_add_on_for_splunk_rh_oauth2_token(admin.MConfigHandler):
 
         try:
             logger.debug("In OAuth rest handler to get access token")
-            # Get args parameters from the request
-            url = self.callerArgs.data['url'][0]
+            # Get args parameters from the request. Commented this line and keeping hard-coded url
+            # url = self.callerArgs.data['url'][0]
+            url = 'https://api.lansweeper.com/api/integrations/oauth/token'
             logger.debug("oAUth url %s", url)
 
             # [To-Do]: Need to verify the configuration with Proxy
