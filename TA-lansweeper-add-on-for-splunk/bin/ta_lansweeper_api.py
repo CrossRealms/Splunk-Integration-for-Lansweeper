@@ -415,9 +415,11 @@ class Lansweeper:
             cursor = response_json['data']['site']['assetResources']['pagination']['next']
             for item in items:
                 asset = item
-                asset['id'] = item['_id']
                 if '_id' in asset:
+                    asset['id'] = item['_id']
                     del asset['_id']
+                else:
+                    asset['id'] = item['key']
                 for i in asset.get('antiviruses', []):
                 # If antivirus item does not have enabled key then set it to unknown
                     if "enabled" not in i:

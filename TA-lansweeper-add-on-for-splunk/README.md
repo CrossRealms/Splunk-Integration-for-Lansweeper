@@ -148,6 +148,12 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.3.1 (Sep 2022)
+* Handled the Lansweeper API issue.
+    * What was the issue?: As recently noticed (Sep 2022) Lansweeper API removed the field "_id" from the API response. The Lansweeper API Document still does not mention anything about this change on it.
+    * But the Add-on now handles the situation gracefully by using the "key" field in the absence of "_id" field.
+* Updated splunklib to the latest version (v1.7.2) to resolve the App-Inspect Failure.
+
 Version 1.3.0 (Apr 2022)
 * Added support to collect antivirus details in both DB Connect input and API input.
 * Added props/field-extraction for the Antivirus fields.
