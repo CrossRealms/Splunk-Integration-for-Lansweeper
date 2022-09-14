@@ -151,7 +151,7 @@ RELEASE NOTES
 Version 1.3.0 (Apr 2022)
 * Added support to collect antivirus details in both DB Connect input and API input.
 * Added props/field-extraction for the Antivirus fields.
-* Updated Add-on to use the latest UCC version to resolve the App-Inspect Failure.
+* Updated Add-on to use the latest UCC version (5.10.2) to resolve the App-Inspect Failure.
 
 Upgrade Guide from Version 1.2.x to 1.3.0
 * The API input will collect the antivirus details from Lansweeper without any manual intervention.
