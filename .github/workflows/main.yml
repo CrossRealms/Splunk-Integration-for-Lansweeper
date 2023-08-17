@@ -14,11 +14,6 @@ on:
       - '**'
 
   workflow_dispatch:
-    inputs:
-      comment:
-        description: 'Add comment for manual workflow execution.'
-        required: false
-        default: 'Manual execution of Github workflow.'
 
 jobs:
   pre-release:
@@ -26,25 +21,20 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      - name: "Generate App Build and Performing App Inspect Checks"
-        run: |
-          echo "Lansweeper App for Splunk"
-
-      - uses: VatsalJagani/splunk-app-action@v1
+      - uses: VatsalJagani/splunk-app-action@v2
         with:
           app_dir: "lansweeper_app_for_splunk"
-          app_build_name: "lansweeper_app_for_splunk"
           splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
           splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
+          app_utilities: "whats_in_the_app"
+          my_github_token: ${{ secrets.MY_GITHUB_TOKEN }}
 
-
-      - name: "Generate Add-on Build and Performing App Inspect Checks"
-        run: |
-          echo "Lansweeper Add-on for Splunk"
-
-      - uses: VatsalJagani/splunk-app-action@v1
+      - uses: VatsalJagani/splunk-app-action@v2
         with:
           app_dir: "TA-lansweeper-add-on-for-splunk"
-          app_build_name: "TA-lansweeper-add-on-for-splunk"
           splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
           splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
+          app_utilities: "whats_in_the_app, logger"
+          my_github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          logger_log_files_prefix: "ta_lansweeper"
+          logger_sourcetype: "lansweeper-ta:logs"
