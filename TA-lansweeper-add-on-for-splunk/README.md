@@ -19,6 +19,13 @@ Use the <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Spl
    * Browser: Google Chrome, Mozilla Firefox, Safari
 
 
+## What's inside the Add-on
+
+* No of XML Dashboards: **3**
+* Approx Total Viz(Charts/Tables/Map) in XML dashboards: **0**
+* No of Custom Inputs: **1**
+
+
 
 TOPOLOGY AND SETTING UP SPLUNK ENVIRONMENT
 ------------------------------------------
@@ -210,10 +217,3 @@ SUPPORT
   * US: +1-312-2784445
 * License Agreement - https://d38o4gzaohghws.cloudfront.net/static/misc/eula.html
 * Copyright - Copyright CrossRealms Internationals, 2021
-# What's inside the App
-
-* No of XML Dashboards: **3**
-* Approx Total Viz(Charts/Tables/Map) in XML dashboards: **0**
-* No of Custom Inputs: **1**
-
-
