@@ -23,6 +23,12 @@ The App is using data collected by the <a href="https://splunkbase.splunk.com/ap
    * Browser: Google Chrome, Mozilla Firefox, Safari
 
 
+## What's inside the App
+
+* No of XML Dashboards: **1**
+* Approx Total Viz(Charts/Tables/Map) in XML dashboards: **5**
+
+
 
 TOPOLOGY AND SETTING UP SPLUNK ENVIRONMENT
 ------------------------------------------
@@ -119,9 +125,3 @@ SUPPORT
   * US: +1-312-2784445
 * License Agreement - https://d38o4gzaohghws.cloudfront.net/static/misc/eula.html
 * Copyright - Copyright CrossRealms Internationals, 2021
-# What's inside the App
-
-* No of XML Dashboards: **1**
-* Approx Total Viz(Charts/Tables/Map) in XML dashboards: **5**
-
-
