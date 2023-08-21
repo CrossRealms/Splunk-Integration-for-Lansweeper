@@ -10,13 +10,17 @@ The Lansweeper Add-on for Splunk is a Splunk App that allows users to collect in
 
 Use the <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Splunk</a> to visualize the data on the dashboards.
 
-
 * Author - CrossRealms International Inc.
 * Creates Index - False
 * Compatible with:
    * Splunk Enterprise version: 8.1, 8.0
    * OS: Platform Independent
    * Browser: Google Chrome, Mozilla Firefox, Safari
+
+## What's inside the Add-on
+
+* No of XML Dashboards: **3**
+* No of Custom Inputs: **1**
 
 
 
