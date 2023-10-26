@@ -153,7 +153,7 @@ To uninstall app, user can follow below steps:
 RELEASE NOTES
 -------------
 Version 1.3.2 (Oct 2023)
-* Fixed the token expired issue.
+* Fixed the token expired issue (Account reconfiguration is required to resume the data collection).
     * What was the issue?: The access token was not getting renewed because the Lansweeper API now returns 401 status code when token is not valid. Earlier it was returning 400 status code.
 
 Version 1.3.1 (Sep 2022)
