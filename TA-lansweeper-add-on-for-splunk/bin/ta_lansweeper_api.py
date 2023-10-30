@@ -116,7 +116,7 @@ class Lansweeper:
             response = json.loads(response)
             self.logger.info('Checking if the access token is expired')
 
-            if status_code == 400:
+            if status_code == 400 or status_code == 401:
             #  and ((response.get('errors', [])[0].get('extensions', {}).get('code') == 'UNAUTHENTICATED') or (response.get('errors', [])[0].get('extensions', {}).get('extensions', {}).get('code') == 'UNAUTHENTICATED')):
                 self.logger.info(
                     'Access token is expired. Calling the refresh token API')
@@ -132,7 +132,7 @@ class Lansweeper:
                 # self.logger.debug("access_token: {}".format(response.get('access_token')))
                 return {'access_token': response.get('access_token')}
             else:
-                self.logger.warning("Non 400 status code. status_code={}, response={}".format(status_code, response))
+                self.logger.warning("Non 400/401 status code. status_code={}, response={}".format(status_code, response))
         except Exception as exception:
             self.logger.exception(
                 'Error while checking if the access token is expired, error={}'.format(exception))
