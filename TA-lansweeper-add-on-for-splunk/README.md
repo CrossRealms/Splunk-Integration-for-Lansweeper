@@ -152,6 +152,9 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.4.0 (Oct 2023)
+* Fixed the issue with token expires every 24 hours and had to manually configure the Add-on again.
+
 Version 1.3.1 (Sep 2022)
 * Handled the Lansweeper API issue.
     * What was the issue?: As recently noticed (Sep 2022) Lansweeper API removed the field "_id" from the API response. The Lansweeper API Document still does not mention anything about this change on it.

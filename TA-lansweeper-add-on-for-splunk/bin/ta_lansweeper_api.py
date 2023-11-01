@@ -1,12 +1,10 @@
-import splunk.rest as rest
 import requests
-import json
 import sys
-import time
+from ta_lansweeper_utils import update_access_token
 
 
 class Lansweeper:
-    def __init__(self, client_id, client_secret, access_token, refresh_token, proxy_settings, logger):
+    def __init__(self, account_name, client_id, client_secret, access_token, refresh_token, proxy_settings, logger, session_key):
         """
         Initialization of the Lansweeper properties
         :param client_id: Client ID of the Lansweeper Account
@@ -16,17 +14,21 @@ class Lansweeper:
         :param proxy_settings: Proxy settings configured by the user
         :param logger: Logger object
         """
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self.access_token = access_token
-        self.refresh_token = refresh_token
-        self.proxy_settings = proxy_settings
         #for Lansweeper V1
         #self.graphql_url = 'https://api.lansweeper.com/api/integrations/graphql' 
         #For Lansweeper V2
         self.graphql_url = 'https://api.lansweeper.com/api/v2/graphql'
         self.auth_url = 'https://api.lansweeper.com/api/integrations/oauth/token'
+
         self.logger = logger
+
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.refresh_token = refresh_token
+        self.proxy_settings = proxy_settings
+
+        self.access_token, self.refresh_token = self.get_refresh_token()
+        update_access_token(access_token=self.access_token, refresh_token=self.refresh_token, client_secret=client_secret, session_key=session_key, stanza_name=account_name)
         self.logger.debug("Lansweeper class initialized.")
 
     def get_refresh_token(self):
@@ -44,7 +46,7 @@ class Lansweeper:
             # self.logger.info(response.text)
             if response.status_code == 200:
                 response_json = response.json()
-                return 200, response_json
+                return response_json.get('access_token'), response_json.get('refresh_token')
             self.logger.debug("Non 200 status code while getting refresh token. status_code={}, response={}".format(response.status_code, response.text))
             return response.status_code, response
         except Exception as exception:
@@ -105,38 +107,6 @@ class Lansweeper:
                 'Error while parsing the response for the site id for site={}, error={}'.format(site_name, exception))
             sys.exit(1)
 
-    def is_token_expired(self, status_code, response):
-        """
-        Checks if the access token is
-        param status_code: status code of the API response
-        param response: Response text of the API response
-        return Refreshed access_token and the refresh_token in case the token is expired, and false otherwise
-        """
-        try:
-            response = json.loads(response)
-            self.logger.info('Checking if the access token is expired')
-
-            if status_code == 400:
-            #  and ((response.get('errors', [])[0].get('extensions', {}).get('code') == 'UNAUTHENTICATED') or (response.get('errors', [])[0].get('extensions', {}).get('extensions', {}).get('code') == 'UNAUTHENTICATED')):
-                self.logger.info(
-                    'Access token is expired. Calling the refresh token API')
-                status, response = self.get_refresh_token()
-
-                if status != 200:
-                    self.logger.error(
-                        'Error while refreshing the access token, status code={} response={}'.format(status, response.text))
-                    return False
-
-                self.logger.info('Successfully refreshed the access token.')
-                # Do not uncomment below line
-                # self.logger.debug("access_token: {}".format(response.get('access_token')))
-                return {'access_token': response.get('access_token')}
-            else:
-                self.logger.warning("Non 400 status code. status_code={}, response={}".format(status_code, response))
-        except Exception as exception:
-            self.logger.exception(
-                'Error while checking if the access token is expired, error={}'.format(exception))
-        return False
 
     def get_asset_info(self, site_id, cursor, page):
         """

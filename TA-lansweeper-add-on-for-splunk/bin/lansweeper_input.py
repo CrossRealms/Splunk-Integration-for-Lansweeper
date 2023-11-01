@@ -78,31 +78,13 @@ class LANSWEEPER_INPUT(smi.Script):
         # Note - Do not uncomment below line in the production
         # logger.debug('Access token={}, ||| Refresh token={}'.format(access_token, refresh_token))
 
-        lansweeper = Lansweeper(client_id=client_id, client_secret=client_secret, access_token=access_token, refresh_token=refresh_token, proxy_settings=proxy_settings, logger=logger)
+        lansweeper = Lansweeper(account_name, client_id=client_id, client_secret=client_secret, access_token=access_token, refresh_token=refresh_token, proxy_settings=proxy_settings, logger=logger, session_key=session_key)
         try:
             # Get site id
             status_code, response = lansweeper.get_site_id(site_name)
             if status_code != 200:
-                is_expired_response = lansweeper.is_token_expired(status_code, response.text)
-                if is_expired_response:
-                    lansweeper.access_token = is_expired_response['access_token']
-                    # Updating the access token and refresh token in the conf files
-                    try:
-                        update_access_token(access_token=is_expired_response['access_token'], refresh_token=refresh_token, client_secret=client_secret, session_key=session_key, stanza_name=account_name)
-                        logger.info('Successfully updated the new access token and refresh token in the conf file')
-                    except Exception as exception:
-                        logger.warning('Error while updating the access token and refresh token in the conf file, error={}'.format(exception))
-                    
-                    logger.debug("Retrying for site-id with new tokens.")
-                    status_code, response = lansweeper.get_site_id(site_name)
-                    if status_code != 200:
-                        logger.error('Error while fetching the site id for site={}, status code={} response={}'.format(site_name, status_code, response.text))
-                        sys.exit(1)
-                    else:
-                        sites = response
-                else:
-                    logger.error('Error while fetching the site id for site={}, status code={} response={}'.format(site_name, status_code, response.text))
-                    sys.exit(1)
+                logger.error('Error while fetching the site id for site={}, status code={} response={}'.format(site_name, status_code, response.text))
+                sys.exit(1)
             else:
                 logger.info('Successfully fetch the site code for site={}'.format(site_name))
                 sites = response
@@ -124,21 +106,8 @@ class LANSWEEPER_INPUT(smi.Script):
                 while is_data:
                     status, response_code, response = lansweeper.get_asset_info(site_id, cursor, page)
                     if not status:
-                        is_expired_response = lansweeper.is_token_expired(response_code, response.text)
-                        if is_expired_response:
-                            lansweeper.access_token = is_expired_response['access_token']
-                            try:
-                                # Updating the access token and refresh token in the conf files
-                                update_access_token(access_token=is_expired_response['access_token'], refresh_token=refresh_token, client_secret=client_secret, session_key=session_key, stanza_name=account_name)
-                                logger.info('Successfully updated the new access token and refresh token in the conf file')
-                            except Exception as exception:
-                                logger.warning('Error while updating the access token and refresh token in the conf file, error={}'.format(exception))
-                            
-                            continue
-
-                        else:
-                            logger.error('Error while fetching the assets for site={}, status code={} response={}'.format(site_name, response_code, response.text))
-                            break
+                        logger.error('Error while fetching the assets for site={}, status code={} response={}'.format(site_name, response_code, response.text))
+                        break
                     else:
                         logger.info('Successfully fetch the assets for site={} page={}'.format(site_name, page))
                         cursor, asset_data = response_code, response
