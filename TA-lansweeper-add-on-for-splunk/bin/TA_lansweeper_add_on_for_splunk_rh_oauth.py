@@ -76,7 +76,7 @@ class ta_lansweeper_add_on_for_splunk_rh_oauth2_token(admin.MConfigHandler):
             }
             session_key = self.getSessionKey()
             headers = {"Content-Type": "application/x-www-form-urlencoded",
-                       'x-ls-integration-id': '74b877ec-ed06-48fb-9e18-6733ea0cf9bb',
+                       'x-ls-integration-id': utils.HEADER_X_LS_INTEGRATION_ID,
                        'x-ls-integration-version': utils.get_conf_stanza(session_key, 'app', 'launcher')[0]["content"]["version"] }
 
             response = requests.post(url=url, data=payload, headers=headers, proxies=proxy_info)

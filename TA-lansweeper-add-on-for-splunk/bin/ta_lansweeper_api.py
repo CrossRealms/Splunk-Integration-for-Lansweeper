@@ -40,7 +40,7 @@ class Lansweeper:
 
         data = {"client_id": self.client_id, "client_secret": self.client_secret,
                 "grant_type": "refresh_token", "refresh_token": self.refresh_token}
-        headers = {'x-ls-integration-id': '74b877ec-ed06-48fb-9e18-6733ea0cf9bb',
+        headers = {'x-ls-integration-id': utils.HEADER_X_LS_INTEGRATION_ID,
                    'x-ls-integration-version': utils.get_conf_stanza(self.session_key, 'app', 'launcher')[0]["content"]["version"]}
         try:
             response = requests.post(
@@ -64,7 +64,7 @@ class Lansweeper:
         """
         headers = {'Content-Type': 'application/json',
                    'Authorization': 'Bearer ' + self.access_token,
-                   'x-ls-integration-id': '74b877ec-ed06-48fb-9e18-6733ea0cf9bb',
+                   'x-ls-integration-id': utils.HEADER_X_LS_INTEGRATION_ID,
                    'x-ls-integration-version': utils.get_conf_stanza(self.session_key, 'app', 'launcher')[0]["content"]["version"]}
         query = """{
         me{
@@ -154,7 +154,7 @@ class Lansweeper:
         """
         headers = {'Content-Type': 'application/json',
                    'Authorization': 'Bearer ' + self.access_token,
-                   'x-ls-integration-id': '74b877ec-ed06-48fb-9e18-6733ea0cf9bb',
+                   'x-ls-integration-id': utils.HEADER_X_LS_INTEGRATION_ID,
                    'x-ls-integration-version': utils.get_conf_stanza(self.session_key, 'app', 'launcher')[0]["content"]["version"]}
         query = """query getAssetResources{ 
             site(id: "%s"){

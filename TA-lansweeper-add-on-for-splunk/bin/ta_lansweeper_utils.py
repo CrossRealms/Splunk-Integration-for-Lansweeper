@@ -13,6 +13,7 @@ from solnlib.modular_input import checkpointer
 import sys
 
 APP_NAME = __file__.split(op.sep)[-3]
+HEADER_X_LS_INTEGRATION_ID = "74b877ec-ed06-48fb-9e18-6733ea0cf9bb"
 
 def get_account_details(session_key, account_name, logger):
     """
