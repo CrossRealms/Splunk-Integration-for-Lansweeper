@@ -171,3 +171,12 @@ def checkpoint_handler(checkpoint_name, session_key, logger):
     except Exception as exception:
         logger.error("Error occurred while fetching checkpoint, error={}".format(exception))
         sys.exit(1)
+
+
+def get_conf_stanza(session_key, conf_file, stanza):
+    _, serverContent = rest.simpleRequest(
+        "/servicesNS/nobody/{}/configs/conf-{}/{}?output_mode=json".format(APP_NAME, conf_file, stanza), 
+        sessionKey=session_key
+    )
+    data = json.loads(serverContent)['entry']
+    return data

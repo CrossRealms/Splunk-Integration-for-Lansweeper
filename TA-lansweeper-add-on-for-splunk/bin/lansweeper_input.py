@@ -78,7 +78,7 @@ class LANSWEEPER_INPUT(smi.Script):
         # Note - Do not uncomment below line in the production
         # logger.debug('Access token={}, ||| Refresh token={}'.format(access_token, refresh_token))
 
-        lansweeper = Lansweeper(client_id=client_id, client_secret=client_secret, access_token=access_token, refresh_token=refresh_token, proxy_settings=proxy_settings, logger=logger)
+        lansweeper = Lansweeper(client_id=client_id, client_secret=client_secret, access_token=access_token, refresh_token=refresh_token, proxy_settings=proxy_settings, logger=logger, session_key=session_key)
         try:
             # Get site id
             status_code, response = lansweeper.get_site_id(site_name)

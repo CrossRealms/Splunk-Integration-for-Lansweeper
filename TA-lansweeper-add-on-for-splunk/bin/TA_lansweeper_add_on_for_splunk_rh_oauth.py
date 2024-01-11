@@ -5,6 +5,7 @@ This module will be used to get oauth token from auth code
 """
 
 import urllib
+import ta_lansweeper_utils as utils
 try:
     from urllib import urlencode
 except:
@@ -73,9 +74,12 @@ class ta_lansweeper_add_on_for_splunk_rh_oauth2_token(admin.MConfigHandler):
                 'client_secret': self.callerArgs.data['client_secret'][0],
                 'redirect_uri': self.callerArgs.data['redirect_uri'][0],
             }
-            headers = {"Content-Type": "application/x-www-form-urlencoded", }
+            session_key = self.getSessionKey()
+            headers = {"Content-Type": "application/x-www-form-urlencoded",
+                       'x-ls-integration-id': '74b877ec-ed06-48fb-9e18-6733ea0cf9bb',
+                       'x-ls-integration-version': utils.get_conf_stanza(session_key, 'app', 'launcher')[0]["content"]["version"] }
 
-            response = requests.post(url=url, data=payload, proxies=proxy_info)
+            response = requests.post(url=url, data=payload, headers=headers, proxies=proxy_info)
 
             content = response.json()
 

@@ -3,10 +3,11 @@ import requests
 import json
 import sys
 import time
+import ta_lansweeper_utils as utils
 
 
 class Lansweeper:
-    def __init__(self, client_id, client_secret, access_token, refresh_token, proxy_settings, logger):
+    def __init__(self, client_id, client_secret, access_token, refresh_token, proxy_settings, logger, session_key):
         """
         Initialization of the Lansweeper properties
         :param client_id: Client ID of the Lansweeper Account
@@ -21,6 +22,7 @@ class Lansweeper:
         self.access_token = access_token
         self.refresh_token = refresh_token
         self.proxy_settings = proxy_settings
+        self.session_key = session_key
         #for Lansweeper V1
         #self.graphql_url = 'https://api.lansweeper.com/api/integrations/graphql' 
         #For Lansweeper V2
@@ -38,9 +40,11 @@ class Lansweeper:
 
         data = {"client_id": self.client_id, "client_secret": self.client_secret,
                 "grant_type": "refresh_token", "refresh_token": self.refresh_token}
+        headers = {'x-ls-integration-id': '74b877ec-ed06-48fb-9e18-6733ea0cf9bb',
+                   'x-ls-integration-version': utils.get_conf_stanza(self.session_key, 'app', 'launcher')[0]["content"]["version"]}
         try:
             response = requests.post(
-                url=self.auth_url, data=data, proxies=self.proxy_settings)
+                url=self.auth_url, data=data, headers=headers, proxies=self.proxy_settings)
             # self.logger.info(response.text)
             if response.status_code == 200:
                 response_json = response.json()
@@ -59,7 +63,9 @@ class Lansweeper:
         return list of sites containing a list of dict of site_name:site_id
         """
         headers = {'Content-Type': 'application/json',
-                   'Authorization': 'Bearer ' + self.access_token}
+                   'Authorization': 'Bearer ' + self.access_token,
+                   'x-ls-integration-id': '74b877ec-ed06-48fb-9e18-6733ea0cf9bb',
+                   'x-ls-integration-version': utils.get_conf_stanza(self.session_key, 'app', 'launcher')[0]["content"]["version"]}
         query = """{
         me{
             username
@@ -147,11 +153,13 @@ class Lansweeper:
         return True, cursor, asset_data in case of successful collection of the assets, and False, status_code and response otherwise
         """
         headers = {'Content-Type': 'application/json',
-                   'Authorization': 'Bearer ' + self.access_token}
+                   'Authorization': 'Bearer ' + self.access_token,
+                   'x-ls-integration-id': '74b877ec-ed06-48fb-9e18-6733ea0cf9bb',
+                   'x-ls-integration-version': utils.get_conf_stanza(self.session_key, 'app', 'launcher')[0]["content"]["version"]}
         query = """query getAssetResources{ 
             site(id: "%s"){
             assetResources(pagination:{ 
-                limit: 100
+                limit: 500
                 cursor: "%s"
                 page: %s
             }, fields: [

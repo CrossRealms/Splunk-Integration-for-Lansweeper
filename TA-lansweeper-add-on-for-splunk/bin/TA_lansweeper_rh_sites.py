@@ -62,7 +62,8 @@ class LansweeperSites(admin.MConfigHandler):
                 access_token=access_token,
                 refresh_token=refresh_token,
                 proxy_settings=proxy_settings,
-                logger=logger
+                logger=logger,
+                session_key=session_key
             )
             try:
                 status_code, response = lansweeper.get_site_id(site_name)
