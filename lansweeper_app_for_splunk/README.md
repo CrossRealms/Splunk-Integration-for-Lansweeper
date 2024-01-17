@@ -12,13 +12,11 @@ The App is using data collected by the <a href="https://splunkbase.splunk.com/ap
 
 
 * Author - CrossRealms International Inc.
-* Version - 1.1.2
-* Build - 1
 * Creates Index - False
 * Uses KV Store - True. This App uses Splunk KV Store for storing some of the lookup files
 * App has some savedsearches to fill lookups
 * Compatible with:
-   * Splunk Enterprise version: 8.1, 8.0
+   * Splunk Enterprise version: 9.1, 9.0, 8.2
    * OS: Platform Independent
    * Browser: Google Chrome, Mozilla Firefox, Safari
 
@@ -123,5 +121,5 @@ SUPPORT
 -------
 * Contact - CrossRealms International Inc.
   * US: +1-312-2784445
-* License Agreement - https://d38o4gzaohghws.cloudfront.net/static/misc/eula.html
-* Copyright - Copyright CrossRealms Internationals, 2021
+* License Agreement - https://cdn.splunkbase.splunk.com/static/misc/eula.html
+* Copyright - Copyright CrossRealms Internationals, 2024

@@ -13,7 +13,7 @@ Use the <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Spl
 * Author - CrossRealms International Inc.
 * Creates Index - False
 * Compatible with:
-   * Splunk Enterprise version: 8.1, 8.0
+   * Splunk Enterprise version: 9.1, 9.0, 8.2
    * OS: Platform Independent
    * Browser: Google Chrome, Mozilla Firefox, Safari
 
@@ -221,5 +221,5 @@ SUPPORT
 -------
 * Contact - CrossRealms International Inc.
   * US: +1-312-2784445
-* License Agreement - https://d38o4gzaohghws.cloudfront.net/static/misc/eula.html
-* Copyright - Copyright CrossRealms Internationals, 2021
+* License Agreement - https://cdn.splunkbase.splunk.com/static/misc/eula.html
+* Copyright - Copyright CrossRealms Internationals, 2024
