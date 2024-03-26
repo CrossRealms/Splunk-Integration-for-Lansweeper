@@ -1,6 +1,5 @@
 import import_declare_test
 import sys
-import json
 from solnlib import log
 from ta_lansweeper_utils import get_account_details, get_log_level, get_proxy_settings, write_event, update_access_token
 from ta_lansweeper_api import Lansweeper

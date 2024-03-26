@@ -1,7 +1,5 @@
 import import_declare_test
-import json
 import logging
-import sys
 
 import splunk.admin as admin
 import splunk.rest as rest
