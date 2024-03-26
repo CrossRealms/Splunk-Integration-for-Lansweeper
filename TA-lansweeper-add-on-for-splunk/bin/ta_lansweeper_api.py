@@ -1,8 +1,6 @@
-import splunk.rest as rest
 import requests
 import json
 import sys
-import time
 import ta_lansweeper_utils as utils
 
 
@@ -156,9 +154,9 @@ class Lansweeper:
                    'Authorization': 'Bearer ' + self.access_token,
                    'x-ls-integration-id': utils.HEADER_X_LS_INTEGRATION_ID,
                    'x-ls-integration-version': utils.get_conf_stanza(self.session_key, 'app', 'launcher')[0]["content"]["version"]}
-        query = """query getAssetResources{ 
+        query = """query getAssetResources{
             site(id: "%s"){
-            assetResources(pagination:{ 
+            assetResources(assetPagination:{
                 limit: 500
                 cursor: "%s"
                 page: %s
@@ -298,7 +296,7 @@ class Lansweeper:
 
         query = """query getAssetResources{ 
             site(id: "{%s}"){
-            assetResources(pagination:{ 
+            assetResources(assetPagination:{ 
                 limit: 100
                 cursor: "%s"
                 page: %s
