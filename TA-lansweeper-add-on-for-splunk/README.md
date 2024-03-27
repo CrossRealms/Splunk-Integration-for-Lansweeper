@@ -152,6 +152,10 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.3.4 (March 2024)
+* Added configuration for _time field extraction.
+* Made field name changes as per the API changes.
+
 Version 1.3.3 (Jan 2024)
 * Updated the API headers.
 * To improve the data collection performance, increased the assets per page limit from 100 to 500.
