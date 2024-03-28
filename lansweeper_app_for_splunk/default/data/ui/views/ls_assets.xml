@@ -1,38 +1,59 @@
 <form version="1.1">
   <label>Assets</label>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="tkn_asset_state" searchWhenChanged="true">
+      <label>State</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <fieldForLabel>Statename</fieldForLabel>
+      <fieldForValue>Statename</fieldForValue>
+      <search>
+        <query>`ls_assets_data`   | dedup Statename</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <prefix>Statename="</prefix>
+      <suffix>"</suffix>
+    </input>
+  </fieldset>
   <row>
     <panel>
       <title>Total Assets</title>
       <single>
         <search>
-          <query>`ls_assets_data`  | eval id=coalesce(AssetID,id)| dedup id | stats count</query>
-          <earliest>-4h@h</earliest>
+          <query>`ls_assets_data`  | eval id=coalesce(AssetID,id)| dedup id | search $tkn_asset_state$ | stats count</query>
+          <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
+        <option name="height">206</option>
       </single>
     </panel>
     <panel>
-      <title>Asset States</title>
-      <table>
+      <title>Assets by State</title>
+      <chart>
         <search>
-          <query>`ls_assets_data`  | eval id=coalesce(AssetID,id)| dedup id  | stats count by Statename</query>
-          <earliest>-4h@h</earliest>
+          <query>`ls_assets_data`  | eval id=coalesce(AssetID,id) | dedup id | search $tkn_asset_state$ | stats count by Statename</query>
+          <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>
-        <option name="drilldown">none</option>
-        <option name="refresh.display">progressbar</option>
-      </table>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
     </panel>
+  </row>
+  <row>
     <panel>
-      <title>Lansweeper Agent</title>
+      <title>Lansweeper Agents</title>
       <table>
         <search>
-          <query>`ls_assets_data`  Statename=$tkn_asset_state|s$  
+          <query>`ls_assets_data`
 | eval id=coalesce(AssetID,id) 
 | dedup id 
-| eval LsAgentVersion=if(isnull(LsAgentVersion),"No Lansweeper Agent",LsAgentVersion) | stats count as AssetCount by LsAgentVersion</query>
+| search $tkn_asset_state$  
+| eval LsAgentVersion=if(isnull(LsAgentVersion),"No Lansweeper Agent",LsAgentVersion) | stats count as AssetCount by LsAgentVersion | sort 0 -AssetCount </query>
           <earliest>-4h@m</earliest>
           <latest>now</latest>
         </search>
@@ -44,8 +65,8 @@
       <title>Asset Types</title>
       <table>
         <search>
-          <query>`ls_assets_data`  | eval id=coalesce(AssetID,id) | dedup id | stats count by AssetTypename</query>
-          <earliest>-4h@h</earliest>
+          <query>`ls_assets_data`  | eval id=coalesce(AssetID,id) | dedup id | search $tkn_asset_state$  | stats count as AssetCount by AssetTypename | sort 0 -AssetCount | rename AssetTypename as AssetType</query>
+          <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>
         <option name="drilldown">none</option>
@@ -56,27 +77,16 @@
   <row>
     <panel>
       <title>All Assets</title>
-      <input type="dropdown" token="tkn_asset_state">
-        <label>State</label>
-        <choice value="*">All</choice>
-        <default>*</default>
-        <fieldForLabel>State</fieldForLabel>
-        <fieldForValue>State</fieldForValue>
-        <search>
-          <query>`ls_assets_data`   | dedup Statename</query>
-          <earliest>-4h@h</earliest>
-          <latest>now</latest>
-        </search>
-      </input>
       <table>
         <search>
-          <query>`ls_assets_data`  Statename=$tkn_asset_state|s$  
+          <query>`ls_assets_data`
 | eval id=coalesce(AssetID,id) 
 | dedup id 
+| search $tkn_asset_state$
 | rename AssetName as Name, AssetTypename as Type, Statename as State, Userdomain as Domain, AssetGroup as GroupName, IPAddress as IPAddress, Mac as MacAddress, OScode as OSVersion, Username as User, Firstseen as FirstSeen, Lastseen as LastSeen, LastChanged as LastChanged 
-| fields Name, OS, Type, State, Domain, GroupName, IPAddress, MacAddress, OSVersion, User, FirstSeen, LastSeen, LastChanged, BuildNumber, Description ,DNSName,Domain,FQDN,IPLocation,LastLsAgent,LsAgentVersion,Manufacturer,Model,Memory,Processor,Serialnumber,ServiceVersion,Version 
-| table  State,GroupName,Name, Description,IPAddress,MacAddress,FQDN,IPLocation,Domain,User,Type, OS,OSVersion,LsAgentVersion,LastLsAgent,LastSeen,LastChanged,Memory,Manufacturer,Model,Processor,Serialnumber</query>
-          <earliest>-4h@h</earliest>
+| table State,GroupName,Name, Description,IPAddress,MacAddress,FQDN,IPLocation,Domain,User,Type, OS,OSVersion,LsAgentVersion,LastLsAgent,LastSeen,LastChanged,Memory,Manufacturer,Model,Processor,Serialnumber
+| fillnull value="-"</query>
+          <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -88,6 +98,9 @@
         <option name="rowNumbers">true</option>
         <option name="totalsRow">false</option>
         <option name="wrap">true</option>
+        <format type="color" field="State">
+          <colorPalette type="map">{"Active":#008000,"Non-active":#B83C08}</colorPalette>
+        </format>
       </table>
     </panel>
   </row>
