@@ -74,6 +74,9 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.1.3 (March 2024)
+* A dashboard improvement with global filters, color coding, and panel arrangements.
+
 Version 1.1.2
 * Changes to make compatible with the latest Splunk AppInspect - Dashboards version changed to 1.1.
 
