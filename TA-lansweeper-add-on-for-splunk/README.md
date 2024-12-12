@@ -152,6 +152,9 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.3.5 (December 2024)
+* Splunk-python-sdk updated to the latest version.
+
 Version 1.3.4 (March 2024)
 * Fixed configuration for timestamp extraction.
 * Made field name changes as per the API changes.
