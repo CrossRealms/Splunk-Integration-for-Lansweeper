@@ -30,3 +30,4 @@ jobs:
           logger_log_files_prefix: "ta_lansweeper"
           logger_sourcetype: "lansweeper-ta:logs"
           python_requirements_file: "lib/requirements.txt"
+          is_remove_not_allowed_executables_from_lib: true
