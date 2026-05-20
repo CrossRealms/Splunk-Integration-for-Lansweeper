@@ -1,0 +1,32 @@
+name: "Build, Splunkbase App Inspect, App Utilities"
+
+on:
+  push:
+    branches:
+      - 'master'
+  workflow_dispatch:
+
+jobs:
+  on_main:
+    name: "Build, Splunkbase App Inspect, App Utilities"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: VatsalJagani/splunk-app-action@v6
+        with:
+          app_dir: "lansweeper_app_for_splunk"
+          to_make_permission_changes: true
+          splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
+          splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
+          app_utilities: "whats_in_the_app"
+
+      - uses: VatsalJagani/splunk-app-action@v6
+        with:
+          app_dir: "TA-lansweeper-add-on-for-splunk"
+          to_make_permission_changes: true
+          splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
+          splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
+          app_utilities: "whats_in_the_app, logger"
+          logger_log_files_prefix: "ta_lansweeper"
+          logger_sourcetype: "lansweeper-ta:logs"
+          python_requirements_file: "lib/requirements.txt"

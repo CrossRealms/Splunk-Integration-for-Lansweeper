@@ -1,7 +1,2 @@
-##
-## SPDX-FileCopyrightText: 2020 Splunk, Inc. <sales@splunk.com>
-## SPDX-License-Identifier: LicenseRef-Splunk-1-2020
-##
-##
-
-splunktaucclib==4.0.7
+splunktaucclib==8.1.0
+splunk-sdk==2.1.1
