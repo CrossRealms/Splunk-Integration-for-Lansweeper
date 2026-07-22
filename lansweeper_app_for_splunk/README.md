@@ -1,5 +1,7 @@
 # Lansweeper App for Splunk
 
+Note:- Do not use App version 2.0.0 and above for Splunk version below 10.4.0.
+
 ### Download from Splunkbase
 https://splunkbase.splunk.com/app/5419/
 
@@ -16,7 +18,7 @@ The App is using data collected by the <a href="https://splunkbase.splunk.com/ap
 * Uses KV Store - True. This App uses Splunk KV Store for storing some of the lookup files
 * App has some savedsearches to fill lookups
 * Compatible with:
-   * Splunk Enterprise version: 9.1, 9.0, 8.2
+   * Splunk Enterprise version: 10.4.x
    * OS: Platform Independent
    * Browser: Google Chrome, Mozilla Firefox, Safari
 
@@ -74,6 +76,10 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 2.0.0 (July 2026)
+* Now supports Splunk Enterprise 10.4.x and higher only (drops support for Splunk versions below 10.4.0).
+* Upgraded CI to `splunk-app-action@v7`.
+
 Version 1.1.3 (March 2024)
 * A dashboard improvement with global filters, color coding, and panel arrangements.
 
