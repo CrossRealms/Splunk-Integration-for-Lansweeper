@@ -1,7 +1,5 @@
 # Lansweeper Add-on for Splunk
 
-Note:- Do not use Add-on version 2.0.0 and above for Splunk version below 10.4.0.
-
 ### Download from Splunkbase
 https://splunkbase.splunk.com/app/5418/
 
@@ -15,7 +13,7 @@ Use the <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Spl
 * Author - CrossRealms International Inc.
 * Creates Index - False
 * Compatible with:
-   * Splunk Enterprise version: 10.4.x
+   * Splunk Enterprise version: 9.x and 10.x (including 10.4.x)
    * OS: Platform Independent
    * Browser: Google Chrome, Mozilla Firefox, Safari
 
@@ -154,9 +152,8 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
-Version 2.0.0 (July 2026)
-* Added compatibility with Python 3.13 (set `python.version = latest` and `python.required = 3.13`).
-* Now supports Splunk Enterprise 10.4.x and higher only (drops support for Splunk versions below 10.4.0).
+Version 1.4.0 (July 2026)
+* Added compatibility with Python 3.13 while retaining Python 3.9 / existing Splunk support (`python.version = latest`).
 * Upgraded CI to `splunk-app-action@v7`.
 
 Version 1.3.5 (December 2024)
