@@ -1,5 +1,6 @@
 {
     "meta": {
+        "supportedPythonVersion": ["3.13", "3.9"],
         "name": "TA-lansweeper-add-on-for-splunk",
         "displayName": "Lansweeper Add-on for Splunk",
         "version": "1.4.0",

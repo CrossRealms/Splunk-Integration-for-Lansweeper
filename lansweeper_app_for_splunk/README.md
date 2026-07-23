@@ -16,7 +16,7 @@ The App is using data collected by the <a href="https://splunkbase.splunk.com/ap
 * Uses KV Store - True. This App uses Splunk KV Store for storing some of the lookup files
 * App has some savedsearches to fill lookups
 * Compatible with:
-   * Splunk Enterprise version: 9.x and 10.x (including 10.4.x)
+   * Splunk Enterprise version: 10.2.x, 10.4.x
    * OS: Platform Independent
    * Browser: Google Chrome, Mozilla Firefox, Safari
 

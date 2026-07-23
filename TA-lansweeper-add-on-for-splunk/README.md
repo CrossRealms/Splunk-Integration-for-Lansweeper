@@ -13,7 +13,7 @@ Use the <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Spl
 * Author - CrossRealms International Inc.
 * Creates Index - False
 * Compatible with:
-   * Splunk Enterprise version: 9.x and 10.x (including 10.4.x)
+   * Splunk Enterprise version: 10.2.x, 10.4.x
    * OS: Platform Independent
    * Browser: Google Chrome, Mozilla Firefox, Safari
 
