@@ -16,7 +16,7 @@ The App is using data collected by the <a href="https://splunkbase.splunk.com/ap
 * Uses KV Store - True. This App uses Splunk KV Store for storing some of the lookup files
 * App has some savedsearches to fill lookups
 * Compatible with:
-   * Splunk Enterprise version: 9.1, 9.0, 8.2
+   * Splunk Enterprise version: 10.2.x, 10.4.x
    * OS: Platform Independent
    * Browser: Google Chrome, Mozilla Firefox, Safari
 
@@ -74,6 +74,10 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.2.0 (July 2026)
+* Added compatibility with Python 3.13 while retaining existing Splunk support.
+* Upgraded CI to `splunk-app-action@v7`.
+
 Version 1.1.3 (March 2024)
 * A dashboard improvement with global filters, color coding, and panel arrangements.
 

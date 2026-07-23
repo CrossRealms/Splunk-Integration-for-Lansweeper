@@ -13,7 +13,7 @@ Use the <a href="https://splunkbase.splunk.com/app/5419/">Lansweeper App for Spl
 * Author - CrossRealms International Inc.
 * Creates Index - False
 * Compatible with:
-   * Splunk Enterprise version: 9.1, 9.0, 8.2
+   * Splunk Enterprise version: 10.2.x, 10.4.x
    * OS: Platform Independent
    * Browser: Google Chrome, Mozilla Firefox, Safari
 
@@ -152,6 +152,10 @@ To uninstall app, user can follow below steps:
 
 RELEASE NOTES
 -------------
+Version 1.4.0 (July 2026)
+* Added compatibility with Python 3.13 while retaining Python 3.9 / existing Splunk support (`python.version = latest`).
+* Upgraded CI to `splunk-app-action@v7`.
+
 Version 1.3.5 (December 2024)
 * Splunk-python-sdk updated to the latest version.
 
